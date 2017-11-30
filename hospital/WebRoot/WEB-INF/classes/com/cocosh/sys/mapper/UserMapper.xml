@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cocosh.sys.mapper.UserMapper">
+	<insert id="add" parameterType="com.cocosh.sys.model.User">
+		insert into sys_user(id,username,password,nickname,mobile,head_img,is_locked,depart_id,create_date,modify_date,type,UserId)
+		values(#{id},#{username},#{password},#{nickname},#{mobile},#{head_img},#{is_locked},#{depart_id},now(),now(),#{type},#{UserId})
+	</insert>
+	
+	<parameterMap type="Map" id="delParms">
+		<parameter property="del_flg"/>
+		<parameter property="del_ids"/>
+	</parameterMap>
+	<update id="del" parameterMap="delParms">
+		update sys_user set is_locked=#{del_flg} where id in 
+		<foreach item="item" index="index" collection="del_ids" open="(" separator="," close=")">
+			#{item}
+		</foreach> 
+	</update>
+	
+	<update id="update" parameterType="com.cocosh.sys.model.User">
+		update sys_user 
+		<set>
+			<if test="username!=null and username!=''">username=#{username},</if>
+			<if test="password!=null and password!=''">password=#{password},</if>
+			<if test="nickname!=null and nickname!=''">nickname=#{nickname},</if>
+			<if test="mobile!=null and mobile!=''">mobile=#{mobile},</if>
+			<if test="head_img!=null and head_img!=''">head_img=#{head_img},</if>
+			<if test="login_ip!=null and login_ip!=''">login_ip=#{login_ip},</if>
+			<if test="is_locked!=null and is_locked!=''">is_locked=#{is_locked},</if>
+			<if test="fail_count!=null and fail_count!=''">fail_count=#{fail_count},</if>
+			<if test="depart_id!=null and depart_id!=''">depart_id=#{depart_id},</if>
+			<if test="UserId!=null and UserId!=''">UserId=#{UserId},</if>
+		</set>
+		,modify_date=now() where id=#{id}
+	</update>
+	
+	<select id="queryPage" parameterType="vo" resultType="com.cocosh.sys.model.User">
+		select id,username,password,nickname,mobile,head_img,login_ip,is_locked,fail_count,depart_id,create_date,type,UserId from sys_user  
+		<where>
+		<if test="keywords!=null and keywords!=''">and (username like '%${keywords}%' or mobile like '%${keywords}%')</if>
+		</where>
+		<choose>
+			<when test="orderField !=null and orderField !=''">
+				 order by ${orderField} 
+				 <if test="orderDirection != null and orderDirection != ''">#{orderDirection}</if>
+			</when>
+			<otherwise>
+				 order by create_date desc 
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="queryById" parameterType="String" resultType="com.cocosh.sys.model.User">
+		select id ,username,password,nickname,mobile,head_img,is_locked,depart_id,UserId from sys_user where id=#{id}
+	</select>
+	
+	<select id="queryByIds" resultType="com.cocosh.sys.model.User">
+		SELECT * from sys_user where id in 
+		  <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		  </foreach> 
+		 ORDER BY create_date DESC
+	</select>
+	
+	<select id="queryLogin" parameterType="com.cocosh.sys.model.User" resultType="com.cocosh.sys.model.User">
+		select id ,username,nickname,password,mobile,head_img,is_locked,type,depart_id,UserId from sys_user where (username=#{username} or mobile=#{username}) and password=#{password} and (type=0 or type=1)
+	</select>
+	
+	<select id="queryByRole" parameterType="String" resultType="com.cocosh.sys.model.User">
+		SELECT id, username,UserId from sys_user  where id in (SELECT DISTINCT user_id from sys_user_role WHERE role_id=#{role_id})
+		ORDER BY create_date DESC
+	</select>
+	
+	<select id="queryByRoles" resultType="com.cocosh.sys.model.User">
+		SELECT id,username,UserId  from sys_user where id in  (SELECT DISTINCT user_id from sys_user_role WHERE role_id in 
+		  <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		  </foreach> 
+		)
+		 ORDER BY create_date DESC
+	</select>
+	
+	<select id="queryByMobile" parameterType="String" resultType="com.cocosh.sys.model.User">
+		SELECT * from sys_user where mobile=#{mobile} limit 1
+	</select>
+	
+	<select id="queryByUsername" parameterType="String" resultType="com.cocosh.sys.model.User">
+		SELECT * from sys_user where username=#{username} limit 1
+	</select>
+	
+	<select id="queryCountByDepartId"  parameterType="String" resultType="Integer">
+	   select count(*) from sys_user where depart_id=#{depart_id}
+	</select>
+	<!-- 通过企业号Userid查询用户 -->
+	<select id="queryByUserId" parameterType="String" resultType="com.cocosh.sys.model.User">
+		select id username,password,nickname,mobile,head_img,is_locked,depart_id,UserId from sys_user where UserId=#{UserId}
+	</select>
+	
+</mapper>
