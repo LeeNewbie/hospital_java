@@ -35,13 +35,6 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
                         <form action="" method="post" class="form-horizontal">
-                             <div class="form-group">
-                                <label class="col-sm-2 control-label">微信企业号账号</label>
-
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="UserId" value="${user.userId}">
-                                </div>
-                            </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">用户名</label>
@@ -163,12 +156,7 @@
 			if($("[name='is_reset']").is(":checked"))is_reset=1;
 			var is_locked=0;
 			if($("[name='is_locked']").is(":checked"))is_locked=1;
-			var depart_id=$("[name='depart']").val();
-			if(depart_id==""){
-			  opt_error("请选择部门！");
-			  return ;
-			}
-        	$.post("${ctx}/manage/user/update",{"id":"${user.id}","UserId":$("[name='UserId']").val(),"username":$("[name='username']").val(),"is_reset":is_reset,"mobile":$("[name='mobile']").val(),"nickname":$("[name='nickname']").val(),"depart_id":depart_id,"is_locked":is_locked,"roles":roles.toString()},function(data){
+        	$.post("${ctx}/manage/user/update",{"id":"${user.id}","username":$("[name='username']").val(),"is_reset":is_reset,"mobile":$("[name='mobile']").val(),"nickname":$("[name='nickname']").val(),"is_locked":is_locked,"roles":roles.toString()},function(data){
 					if(data.code=="0"){
 						opt_success("修改成功",0);
 					}else if(data.code=="1"){
