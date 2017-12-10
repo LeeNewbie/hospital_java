@@ -35,25 +35,9 @@
         <div class="row" style="height: 100%">
             <div class="col-sm-12" style="height: 100%">
                 <div class="ibox-title" >
-                        <p style="font-size:65px;color:#00AA88;height: 50%;text-align: center;padding-top: 120px;">欢迎登录信乾管理系统</p>
+                        <p style="font-size:65px;color:#00AA88;height: 50%;text-align: center;padding-top: 120px;">欢迎登录病例管理系统</p>
                 </div>
                 
-                <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h5 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#version" href="#v40">最新消息><a href="javascript:;" onclick="location.href='${ctx}/manage/message/list'"  style="color: #00AA88">查看更多</a></a>
-                                </h5>
-                        </div>
-                           <div id="v40" class="panel-collapse collapse in">
-                               <div class="panel-body">
-                                   <ol>
-                                       <c:forEach items="${list }" var="m">
-                                          <li style="line-height: 30px"> ${m.content} &nbsp;&nbsp;[<fmt:formatDate value="${m.create_date}" pattern="yyyy-MM-dd  hh:mm:ss"/>]</li>
-                                       </c:forEach>
-                                   </ol>
-                               </div>
-                           </div>
-                  </div>
             </div>
         </div>
         
