@@ -36,7 +36,7 @@
             <div class="m-b-md">
                 <img alt="image" class="img-circle circle-border" src="${ctx}/statics/manage/img/logo.png" width="140" height="140">
             </div>
-            <h3>信乾业务管理系统</h3>
+            <h3>病例管理系统</h3>
             <form class="m-t" role="form" action="${ctx }/manage/login" method="post">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="用户名" required name="username">

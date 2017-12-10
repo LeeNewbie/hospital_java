@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cocosh.hos.mapper.HlabelMapper">
+	<sql id="Base_Column_List">
+		id,name,pid
+	</sql>
+	
+	<insert id="add" parameterType="com.cocosh.hos.model.Hlabel">
+		insert into hos_hlabel(id,name,pid)
+		values(#{id},#{name},#{pid})
+	</insert>
+	
+	<delete id="del">
+		delete from hos_hlabel where id in 
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach> 
+	</delete>
+	
+	<update id="update" parameterType="com.cocosh.hos.model.Hlabel">
+		update hos_hlabel 
+		<set>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(name)">name=#{name},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(pid)">pid=#{pid},</if>
+		</set> 
+		where id=#{id}
+	</update>
+	
+	<select id="queryPage" parameterType="vo" resultType="com.cocosh.hos.model.Hlabel">
+		select h.*,p.name pname from  hos_hlabel h left join hos_hlabel p on h.pid=p.id
+		<where>
+			<if test="keywords!=null and keywords!=''">name like '%${keywords}%'</if>
+		</where>
+		<choose>
+			<when test="orderField !=null and orderField !=''">
+				 order by ${orderField} 
+				 <if test="orderDirection != null and orderDirection != ''">${orderDirection}</if>
+			</when>
+			<otherwise>
+				 order by p.name asc 
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="queryById" parameterType="String" resultType="com.cocosh.hos.model.Hlabel">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_hlabel where id=#{id}
+	</select>
+	
+	<select id="queryByPid" parameterType="String" resultType="com.cocosh.hos.model.Hlabel">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_hlabel where pid=#{pid}
+	</select>
+	
+	<select id="queryByPidAndName" parameterType="com.cocosh.hos.model.Hlabel" resultType="com.cocosh.hos.model.Hlabel">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_hlabel where pid=#{pid} and name=#{name} limit 1
+	</select>
+	
+</mapper>

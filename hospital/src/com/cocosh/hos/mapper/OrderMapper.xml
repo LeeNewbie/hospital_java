@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cocosh.hos.mapper.OrderMapper">
+	<sql id="Base_Column_List">
+		id,sn,name,mobile,gender,age,address,diagnose,diagnose_other,plant_date,operation_time,first_date,is_change,operation_type,hreat_rate,agroup,daoroom,sanwei,duodao,operater,complication,have_other,remark,hbp_location,qrs_width,lbbb,hbp1,hbp2,hbp3,product_id,psingle,compatible,machine_sn,hreart_type,hreat_sn,hreat_location,left_type,left_sn,left_location,right_type,right_sn,right_location,create_date,modify_date
+	</sql>
+	
+	<insert id="add" parameterType="com.cocosh.hos.model.Order">
+		insert into hos_order(id,sn,name,mobile,gender,age,address,diagnose,diagnose_other,plant_date,operation_time,first_date,is_change,operation_type,hreat_rate,agroup,daoroom,sanwei,duodao,operater,complication,have_other,remark,hbp_location,qrs_width,lbbb,hbp1,hbp2,hbp3,product_id,psingle,compatible,machine_sn,hreart_type,hreat_sn,hreat_location,left_type,left_sn,left_location,right_type,right_sn,right_location,create_date,modify_date)
+		values(#{id},#{sn},#{name},#{mobile},#{gender},#{age},#{address},#{diagnose},#{diagnose_other},#{plant_date},#{operation_time},#{first_date},#{is_change},#{operation_type},#{hreat_rate},#{agroup},#{daoroom},#{sanwei},#{duodao},#{operater},#{complication},#{have_other},#{remark},#{hbp_location},#{qrs_width},#{lbbb},#{hbp1},#{hbp2},#{hbp3},#{product_id},#{psingle},#{compatible},#{machine_sn},#{hreart_type},#{hreat_sn},#{hreat_location},#{left_type},#{left_sn},#{left_location},#{right_type},#{right_sn},#{right_location},now(),now())
+	</insert>
+	
+	<delete id="del">
+		delete from hos_order where id in 
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach> 
+	</delete>
+	
+	<update id="update" parameterType="com.cocosh.hos.model.Order">
+		update hos_order 
+		<set>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(sn)">sn=#{sn},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(name)">name=#{name},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(mobile)">mobile=#{mobile},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(gender)">gender=#{gender},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(age)">age=#{age},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(address)">address=#{address},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(diagnose)">diagnose=#{diagnose},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(diagnose_other)">diagnose_other=#{diagnose_other},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(plant_date)">plant_date=#{plant_date},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(operation_time)">operation_time=#{operation_time},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(first_date)">first_date=#{first_date},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(is_change)">is_change=#{is_change},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(operation_type)">operation_type=#{operation_type},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_rate)">hreat_rate=#{hreat_rate},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(agroup)">agroup=#{agroup},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(daoroom)">daoroom=#{daoroom},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(sanwei)">sanwei=#{sanwei},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(duodao)">duodao=#{duodao},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(operater)">operater=#{operater},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(complication)">complication=#{complication},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(have_other)">have_other=#{have_other},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(remark)">remark=#{remark},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hbp_location)">hbp_location=#{hbp_location},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(qrs_width)">qrs_width=#{qrs_width},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(lbbb)">lbbb=#{lbbb},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hbp1)">hbp1=#{hbp1},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hbp2)">hbp2=#{hbp2},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hbp3)">hbp3=#{hbp3},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(product_id)">product_id=#{product_id},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(psingle)">psingle=#{psingle},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(compatible)">compatible=#{compatible},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(machine_sn)">machine_sn=#{machine_sn},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreart_type)">hreart_type=#{hreart_type},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_sn)">hreat_sn=#{hreat_sn},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_location)">hreat_location=#{hreat_location},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_type)">left_type=#{left_type},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_sn)">left_sn=#{left_sn},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_location)">left_location=#{left_location},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_type)">right_type=#{right_type},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_sn)">right_sn=#{right_sn},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_location)">right_location=#{right_location},</if>
+		</set> 
+		,modify_date=now() where id=#{id}
+	</update>
+	
+	<select id="queryPage" parameterType="vo" resultType="com.cocosh.hos.model.Order">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_order 
+		<where>
+			<if test="keywords!=null and keywords!=''">name like '%${keywords}%'</if>
+		</where>
+		<choose>
+			<when test="orderField !=null and orderField !=''">
+				 order by ${orderField} 
+				 <if test="orderDirection != null and orderDirection != ''">${orderDirection}</if>
+			</when>
+			<otherwise>
+				 order by create_date desc 
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="queryById" parameterType="String" resultType="com.cocosh.hos.model.Order">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_order where id=#{id}
+	</select>
+	
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cocosh.hos.mapper.ProductMapper">
+	<sql id="Base_Column_List">
+		id,name,number
+	</sql>
+	
+	<insert id="add" parameterType="com.cocosh.hos.model.Product">
+		insert into hos_product(id,name,number)
+		values(#{id},#{name},#{number})
+	</insert>
+	
+	<delete id="del">
+		delete from hos_product where id in 
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach> 
+	</delete>
+	
+	<update id="update" parameterType="com.cocosh.hos.model.Product">
+		update hos_product 
+		<set>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(name)">name=#{name},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(number)">number=#{number},</if>
+		</set> 
+		where id=#{id}
+	</update>
+	
+	<select id="queryPage" parameterType="vo" resultType="com.cocosh.hos.model.Product">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_product 
+		<where>
+			<if test="keywords!=null and keywords!=''">(name like '%${keywords}%' or number like '%${keywords}%')</if>
+		</where>
+		<choose>
+			<when test="orderField !=null and orderField !=''">
+				 order by ${orderField} 
+				 <if test="orderDirection != null and orderDirection != ''">${orderDirection}</if>
+			</when>
+			<otherwise>
+				 order by name desc 
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="queryById" parameterType="String" resultType="com.cocosh.hos.model.Product">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_product where id=#{id}
+	</select>
+	
+	<select id="query" parameterType="com.cocosh.hos.model.Product" resultType="com.cocosh.hos.model.Product">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_product
+		<where>
+			<if test="name!=null and name!=''">name=#{name}</if>
+			<if test="number!=null and number!=''">and number=#{number}</if>
+		</where>
+	</select>
+	
+	<select id="queryGroupName"  resultType="com.cocosh.hos.model.Product">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_product group by name
+	</select>
+	
+	
+	
+</mapper>

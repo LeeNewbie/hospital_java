@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cocosh.hos.mapper.OrderTestMapper">
+	<sql id="Base_Column_List">
+		id,order_id,hreat_fazhi,hreat_width,hreat_feel,hreat_forbid,hreat_isfeel,hreat_active,right_fazhi,right_width,right_feel,right_forbid,right_isfeel,right_active,right_high,left_fazhi,left_width,left_feel,left_forbid,left_isfeel,left_active
+	</sql>
+	
+	<insert id="add" parameterType="com.cocosh.hos.model.OrderTest">
+		insert into hos_order_test(id,order_id,hreat_fazhi,hreat_width,hreat_feel,hreat_forbid,hreat_isfeel,hreat_active,right_fazhi,right_width,right_feel,right_forbid,right_isfeel,right_active,right_high,left_fazhi,left_width,left_feel,left_forbid,left_isfeel,left_active)
+		values(#{id},#{order_id},#{hreat_fazhi},#{hreat_width},#{hreat_feel},#{hreat_forbid},#{hreat_isfeel},#{hreat_active},#{right_fazhi},#{right_width},#{right_feel},#{right_forbid},#{right_isfeel},#{right_active},#{right_high},#{left_fazhi},#{left_width},#{left_feel},#{left_forbid},#{left_isfeel},#{left_active})
+	</insert>
+	
+	<delete id="del">
+		delete from hos_order_test where id in 
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach> 
+	</delete>
+	
+	<update id="update" parameterType="com.cocosh.hos.model.OrderTest">
+		update hos_order_test 
+		<set>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(order_id)">order_id=#{order_id},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_fazhi)">hreat_fazhi=#{hreat_fazhi},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_width)">hreat_width=#{hreat_width},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_feel)">hreat_feel=#{hreat_feel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_forbid)">hreat_forbid=#{hreat_forbid},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_isfeel)">hreat_isfeel=#{hreat_isfeel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_active)">hreat_active=#{hreat_active},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_fazhi)">right_fazhi=#{right_fazhi},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_width)">right_width=#{right_width},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_feel)">right_feel=#{right_feel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_forbid)">right_forbid=#{right_forbid},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_isfeel)">right_isfeel=#{right_isfeel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_active)">right_active=#{right_active},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_high)">right_high=#{right_high},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_fazhi)">left_fazhi=#{left_fazhi},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_width)">left_width=#{left_width},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_feel)">left_feel=#{left_feel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_forbid)">left_forbid=#{left_forbid},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_isfeel)">left_isfeel=#{left_isfeel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_active)">left_active=#{left_active},</if>
+		</set> 
+		where id=#{id}
+	</update>
+	
+	<select id="queryPage" parameterType="vo" resultType="com.cocosh.hos.model.OrderTest">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_order_test 
+		<where>
+			<if test="keywords!=null and keywords!=''">name like '%${keywords}%'</if>
+		</where>
+		<choose>
+			<when test="orderField !=null and orderField !=''">
+				 order by ${orderField} 
+				 <if test="orderDirection != null and orderDirection != ''">${orderDirection}</if>
+			</when>
+			<otherwise>
+				 order by create_date desc 
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="queryById" parameterType="String" resultType="com.cocosh.hos.model.OrderTest">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_order_test where id=#{id}
+	</select>
+	
+	<select id="queryByOrderId" parameterType="String" resultType="com.cocosh.hos.model.OrderTest">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_order_test where order_id=#{order_id}
+	</select>
+	
+</mapper>

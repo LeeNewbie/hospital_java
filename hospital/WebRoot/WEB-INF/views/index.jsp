@@ -102,6 +102,29 @@
                         </ul>
                     </li>
                     </shiro-ex:hasAnyPermissions>
+                    
+                    <shiro-ex:hasAnyPermissions name="manage:hlabel:list,manage:product:list">
+                    <li>
+                        <a href="#"><i class="fa fa-cogs"></i> <span class="nav-label">业务管理</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                        	<shiro:hasPermission name="manage:hlabel:list">
+                            <li>
+                            	<a class="J_menuItem" href="${ctx }/manage/hlabel/list">标签管理</a>
+                            </li>
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="manage:product:list">
+                            <li>
+                            	<a class="J_menuItem" href="${ctx }/manage/product/list">产品管理</a>
+                            </li>
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="manage:order:list">
+                            <li>
+                            	<a class="J_menuItem" href="${ctx }/manage/order/list">基线表单</a>
+                            </li>
+                            </shiro:hasPermission>
+                        </ul>
+                    </li>
+                    </shiro-ex:hasAnyPermissions>
                 </ul>
             </div>
         </nav>
