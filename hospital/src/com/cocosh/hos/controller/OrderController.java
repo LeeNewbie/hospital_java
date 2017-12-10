@@ -16,8 +16,9 @@ import com.cocosh.framework.base.AjaxResult;
 import com.cocosh.framework.base.BaseConditionVO;
 import com.cocosh.framework.base.BaseController;
 import com.cocosh.framework.mybatis.Page;
+import com.cocosh.framework.util.JsonUtil;
+import com.cocosh.hos.model.Hlabel;
 import com.cocosh.hos.model.Order;
-import com.cocosh.hos.model.Product;
 import com.cocosh.hos.service.HlabelService;
 import com.cocosh.hos.service.OrderHistestService;
 import com.cocosh.hos.service.OrderService;
@@ -51,6 +52,11 @@ public class OrderController extends BaseController {
 	@RequestMapping(value="add",method=RequestMethod.GET)
 	public String add(Model model) {
 		model.addAttribute("plist", productService.queryGroupName());
+		List<Hlabel> phlabels=hlabelService.queryByPid("0");
+		model.addAttribute("phlabels", JsonUtil.obj2json(phlabels));
+		if(phlabels.size()>0){
+			model.addAttribute("hlabels", JsonUtil.obj2json(hlabelService.queryByPid(phlabels.get(0).getId())));
+		}
 		return "hos/order/add";
 	}
 
@@ -73,6 +79,7 @@ public class OrderController extends BaseController {
 		model.addAttribute("histests", histestService.queryByOrderId(id));
 		model.addAttribute("plist", productService.queryGroupName());
 		model.addAttribute("product", productService.queryById(order.getProduct_id()));
+		model.addAttribute("phlables", JsonUtil.obj2json(hlabelService.queryByPid("0")));
 		return "hos/order/update";
 	}
 

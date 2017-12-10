@@ -270,8 +270,46 @@
                          
                          
                            <!-- 标签信息 -->
-                         <div class="gray-bg" id="hlabel_div" style="padding: 20px 0px;margin-bottom: 20px">
-                            <h2>标签信息</h2>
+                         <div class="gray-bg"  style="padding: 20px 0px;margin-bottom: 20px">
+                            <h2>标签信息
+                                 <button class="btn btn-info" type="button" onclick="add_hlable_one()">添加一级标签</button>
+                                 <button class="btn btn-info" type="button" onclick="add_hlable_two()">添加二级标签</button>
+                            </h2>
+                           
+                             <div class="form-group" id="hlabel_div">
+                                <div class="col-sm-4 hlabel" >
+		                             <div class="col-sm-5" >
+		                                 <select class="chosen-select" name="hlable_pid" >
+	                                       <c:forEach items="${plist}" var="p">
+	                                          <option value="${p.name}">${p.name}</option>
+	                                       </c:forEach>
+	                                    </select>
+		                             </div>
+		                              <div class="col-sm-5" >
+		                                 <select class="chosen-select" name="hlable_pid" >
+	                                       <c:forEach items="${plist}" var="p">
+	                                          <option value="${p.name}">${p.name}</option>
+	                                       </c:forEach>
+	                                    </select>
+		                             </div>
+		                              <div class="col-sm-2" >
+		                                 <button class="btn btn-warning" type="button" >删除</button>
+		                              </div>
+	                             </div>
+	                              <div class="col-sm-4" >
+		                             <div class="col-sm-5" >
+		                                 <select class="chosen-select" name="hlable_pid" >
+	                                       <c:forEach items="${plist}" var="p">
+	                                          <option value="${p.name}">${p.name}</option>
+	                                       </c:forEach>
+	                                    </select>
+		                             </div>
+		                             
+		                              <div class="col-sm-2" >
+		                                 <button class="btn btn-warning" type="button" >删除</button>
+		                              </div>
+	                             </div>
+	                         </div>
                          </div>
                          
                           <!-- 术中测试 -->
@@ -538,6 +576,42 @@
         		$('.chosen-select').chosen();
                 $(".chosen-select").trigger("chosen:updated");
         	})
+        }
+        
+        function add_hlable_one(){
+        	var hlable_parent_html="<div class=\"col-sm-4 hlabel\" > <div class=\"col-sm-5\" >";
+        	hlable_parent_html+="<select class=\"chosen-select\" name=\"hlabel_pid\">";
+        	var phlabels=eval('${phlabels}');
+        	for(var i=0;i<phlabels.length;i++){
+        		hlable_parent_html+="<option value="+phlabels[i].id+">"+phlabels[i].name+"</option>";
+        	}
+        	hlable_parent_html+="</select></div>"
+        	hlable_parent_html+="<div class=\"col-sm-2\" ><button class=\"btn btn-warning\" type=\"button\" >删除</button>";
+        	hlable_parent_html+="</div> </div>";
+        	$("#hlabel_div").append(hlable_parent_html);
+        	$('.chosen-select').chosen();
+            $(".chosen-select").trigger("chosen:updated");
+        }
+        function add_hlable_two(){
+        	var hlable_parent_html="<div class=\"col-sm-4 hlabel\" > <div class=\"col-sm-5\" >";
+        	hlable_parent_html+="<select class=\"chosen-select\" name=\"hlabel_pid\">";
+        	var phlabels=eval('${phlabels}');
+        	for(var i=0;i<phlabels.length;i++){
+        		hlable_parent_html+="<option value="+phlabels[i].id+">"+phlabels[i].name+"</option>";
+        	}
+        	hlable_parent_html+="</select></div>";
+        	hlable_parent_html+="<div class=\"col-sm-5\" ><select class=\"chosen-select\" name=\"hlabel_id\">";
+            var hlabels=eval('${hlabels}');
+        	for(var i=0;i<hlabels.length;i++){
+        		hlable_parent_html+="<option value="+hlabels[i].id+">"+hlabels[i].name+"</option>";
+        	}
+        	hlable_parent_html+="</select></div>"
+        	hlable_parent_html+="<div class=\"col-sm-2\" ><button class=\"btn btn-warning\" type=\"button\" >删除</button>";
+        	hlable_parent_html+="</div> </div>";
+        	$("#hlabel_div").append(hlable_parent_html);
+        	$('.chosen-select').chosen();
+            $(".chosen-select").trigger("chosen:updated");
+        	
         }
     </script>
 </body>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cocosh.hos.mapper.OrderHlabelMapper">
+	<sql id="Base_Column_List">
+		order_id,hlabel_pid,hlable_id
+	</sql>
+	
+	<insert id="add" parameterType="com.cocosh.hos.model.OrderHlabel">
+		insert into hos_order_hlabel(order_id,hlabel_pid,hlable_id)
+		values(#{order_id},#{hlabel_pid},#{hlable_id})
+	</insert>
+	
+	<delete id="del">
+		delete from hos_order_hlabel where id in 
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach> 
+	</delete>
+	
+	<delete id="delByOrder">
+		delete from hos_order_hlabel where order_id=#{order_id} 
+	</delete>
+	
+	<update id="update" parameterType="com.cocosh.hos.model.OrderHlabel">
+		update hos_order_hlabel 
+		<set>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(order_id)">order_id=#{order_id},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hlabel_pid)">hlabel_pid=#{hlabel_pid},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hlable_id)">hlable_id=#{hlable_id},</if>
+		</set> 
+		,modify_date=now() where id=#{id}
+	</update>
+	
+	<select id="queryByOrderId" parameterType="String" resultType="com.cocosh.hos.model.OrderHlabel">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_order_hlabel where order_id=#{order_id}
+	</select>
+</mapper>

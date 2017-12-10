@@ -16,10 +16,10 @@ public class FoundEntity {
  	 	FreemarkerUtils.BASE_PACKAGE = "com.cocosh";//BASE包名
 
  	 	FreemarkerUtils.TARGET_PACKAGE = "com.cocosh.hos";//目标包名（为model上一次）
- 	 	FreemarkerUtils.MODULE= "HIS测试";//日志说明（需要日志）
+ 	 	FreemarkerUtils.MODULE= "标签信息";//日志说明（需要日志）
 
 // 	 	FreemarkerUtils.MODULE= null;//无需日志
- 	 	FreemarkerUtils.create("OrderHistest", "hos_order_histest");//PO对象名称和表名
+ 	 	FreemarkerUtils.create("OrderHlabel", "hos_order_hlabel");//PO对象名称和表名
 
 	}
  }

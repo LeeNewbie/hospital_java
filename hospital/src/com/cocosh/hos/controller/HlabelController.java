@@ -1,5 +1,7 @@
 package com.cocosh.hos.controller;
 
+import java.util.List;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import com.cocosh.framework.base.BaseConditionVO;
 import com.cocosh.framework.base.BaseController;
 import com.cocosh.framework.mybatis.Page;
 import com.cocosh.hos.model.Hlabel;
+import com.cocosh.hos.model.Product;
 import com.cocosh.hos.service.HlabelService;
 
 @Controller
@@ -82,5 +85,11 @@ public class HlabelController extends BaseController {
 			return new AjaxResult("0");
 		}
 		return new AjaxResult("1");
+	}
+	
+	@RequestMapping("queryByPid/{name}")
+	@ResponseBody
+	public List<Hlabel> queryByPid(@PathVariable String pid) {
+		return service.queryByPid(pid);
 	}
 }
