@@ -71,7 +71,7 @@
 		<include refid="Base_Column_List" /> 
 		from hos_order 
 		<where>
-			<if test="keywords!=null and keywords!=''">name like '%${keywords}%'</if>
+			<if test="keywords!=null and keywords!=''">(name like '%${keywords}%' or sn like '%${keywords}%' or machine_sn like '%${keywords}%')</if>
 		</where>
 		<choose>
 			<when test="orderField !=null and orderField !=''">
