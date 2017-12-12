@@ -24,6 +24,7 @@ import com.cocosh.hos.service.OrderHistestService;
 import com.cocosh.hos.service.OrderService;
 import com.cocosh.hos.service.OrderTestService;
 import com.cocosh.hos.service.ProductService;
+import com.cocosh.hos.service.impl.OrderHlabelServiceImpl;
 
 @Controller
 @RequestMapping("manage/order")
@@ -38,6 +39,8 @@ public class OrderController extends BaseController {
 	private OrderTestService testService;
 	@Autowired
 	private OrderHistestService histestService;
+	@Autowired
+	private OrderHlabelServiceImpl orderhlabelService;
 
 	@RequiresPermissions("manage:order:list")
 	@RequestMapping("list")
@@ -79,7 +82,13 @@ public class OrderController extends BaseController {
 		model.addAttribute("histests", histestService.queryByOrderId(id));
 		model.addAttribute("plist", productService.queryGroupName());
 		model.addAttribute("product", productService.queryById(order.getProduct_id()));
-		model.addAttribute("phlables", JsonUtil.obj2json(hlabelService.queryByPid("0")));
+		model.addAttribute("orderhlabels", orderhlabelService.queryByOrderId(id));
+		List<Hlabel> phlabels=hlabelService.queryByPid("0");
+		model.addAttribute("parent_hlabels", phlabels);
+		model.addAttribute("phlabels", JsonUtil.obj2json(phlabels));
+		if(phlabels.size()>0){
+			model.addAttribute("hlabels", JsonUtil.obj2json(hlabelService.queryByPid(phlabels.get(0).getId())));
+		}
 		return "hos/order/update";
 	}
 

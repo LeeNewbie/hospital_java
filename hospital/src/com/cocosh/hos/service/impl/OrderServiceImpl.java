@@ -12,10 +12,12 @@ import com.cocosh.framework.mybatis.Page;
 import com.cocosh.framework.mybatis.PaginationInterceptor;
 import com.cocosh.framework.util.StringUtil;
 import com.cocosh.hos.mapper.OrderHistestMapper;
+import com.cocosh.hos.mapper.OrderHlabelMapper;
 import com.cocosh.hos.mapper.OrderMapper;
 import com.cocosh.hos.mapper.OrderTestMapper;
 import com.cocosh.hos.model.Order;
 import com.cocosh.hos.model.OrderHistest;
+import com.cocosh.hos.model.OrderHlabel;
 import com.cocosh.hos.model.OrderTest;
 import com.cocosh.hos.service.OrderService;
 
@@ -28,6 +30,8 @@ public class OrderServiceImpl implements OrderService {
 	private OrderTestMapper testMapper;
 	@Autowired
 	private OrderHistestMapper histestMapper;
+	@Autowired
+	private OrderHlabelMapper orderlabelMapper;
 
 	@LogClass(module = "基线表单管理", method = "添加")
 	@Override
@@ -47,6 +51,13 @@ public class OrderServiceImpl implements OrderService {
 					histest.setId(StringUtil.getUuid());
 					histest.setOrder_id(po.getId());
 					histestMapper.add(histest);
+				}
+			}
+			List<OrderHlabel> orderhlabels=po.getOrderhlabels();
+			if(orderhlabels.size()>0){
+				for(OrderHlabel ohlabel:orderhlabels){
+					ohlabel.setOrder_id(po.getId());
+					orderlabelMapper.add(ohlabel);
 				}
 			}
 		}
@@ -72,6 +83,14 @@ public class OrderServiceImpl implements OrderService {
 					histest.setId(StringUtil.getUuid());
 					histest.setOrder_id(po.getId());
 					histestMapper.add(histest);
+				}
+			}
+			orderlabelMapper.delByOrderId(po.getId());//删除orderlabel
+			List<OrderHlabel> orderhlabels=po.getOrderhlabels();
+			if(orderhlabels.size()>0){
+				for(OrderHlabel ohlabel:orderhlabels){
+					ohlabel.setOrder_id(po.getId());
+					orderlabelMapper.add(ohlabel);
 				}
 			}
 			

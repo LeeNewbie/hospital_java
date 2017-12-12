@@ -3,12 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cocosh.hos.mapper.OrderHistestMapper">
 	<sql id="Base_Column_List">
-		id,order_id,type,fazhi,fazhi_width,nofazhi,nofazhi_width,hv_interval,hpb_width,is_damage
+		id,order_id,type,yuzhi,yuzhi_width,noyuzhi,hv_interval,hpb_width,is_damage
 	</sql>
 	
 	<insert id="add" parameterType="com.cocosh.hos.model.OrderHistest">
-		insert into hos_order_histest(id,order_id,type,fazhi,fazhi_width,nofazhi,nofazhi_width,hv_interval,hpb_width,is_damage)
-		values(#{id},#{order_id},#{type},#{fazhi},#{fazhi_width},#{nofazhi},#{nofazhi_width},#{hv_interval},#{hpb_width},#{is_damage})
+		insert into hos_order_histest(id,order_id,type,yuzhi,yuzhi_width,noyuzhi,hv_interval,hpb_width,is_damage)
+		values(#{id},#{order_id},#{type},#{yuzhi},#{yuzhi_width},#{noyuzhi},#{hv_interval},#{hpb_width},#{is_damage})
 	</insert>
 	
 	<delete id="del">
@@ -27,10 +27,9 @@
 		<set>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(order_id)">order_id=#{order_id},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(type)">type=#{type},</if>
-			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(fazhi)">fazhi=#{fazhi},</if>
-			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(fazhi_width)">fazhi_width=#{fazhi_width},</if>
-			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(nofazhi)">nofazhi=#{nofazhi},</if>
-			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(nofazhi_width)">nofazhi_width=#{nofazhi_width},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(yuzhi)">yuzhi=#{yuzhi},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(yuzhi_width)">yuzhi_width=#{yuzhi_width},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(noyuzhi)">noyuzhi=#{noyuzhi},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hv_interval)">hv_interval=#{hv_interval},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hpb_width)">hpb_width=#{hpb_width},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(is_damage)">is_damage=#{is_damage},</if>

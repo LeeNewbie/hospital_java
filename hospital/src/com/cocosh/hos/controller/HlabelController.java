@@ -87,7 +87,7 @@ public class HlabelController extends BaseController {
 		return new AjaxResult("1");
 	}
 	
-	@RequestMapping("queryByPid/{name}")
+	@RequestMapping("queryByPid/{pid}")
 	@ResponseBody
 	public List<Hlabel> queryByPid(@PathVariable String pid) {
 		return service.queryByPid(pid);

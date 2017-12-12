@@ -50,6 +50,7 @@ public class Order extends BaseEntity {
  	private String hbp3;
  	private String product_id;
  	private Integer psingle;//1单腔，2双腔，3三腔
+ 	private Integer brady;//
  	private Integer compatible;//兼容MRI
  	private String machine_sn;//机器序列号
  	private String hreart_type;
@@ -64,5 +65,6 @@ public class Order extends BaseEntity {
  	//非数据库字段
  	private OrderTest ordertest;
  	private List<OrderHistest> histests;
+ 	private List<OrderHlabel> orderhlabels;
  	
 }

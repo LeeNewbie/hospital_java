@@ -7,13 +7,12 @@ import lombok.Data;
 @Data
 public class OrderHistest implements Serializable {
  	private String id;
- 	private String order_id;
+ 	private String order_id;//有可能是item_id//通用
  	private Integer type;
- 	private String fazhi;
- 	private String fazhi_width;
- 	private String nofazhi;
- 	private String nofazhi_width;
+ 	private String yuzhi;
+ 	private String yuzhi_width;
+ 	private String noyuzhi;
  	private String hv_interval;
  	private String hpb_width;
- 	private String is_damage;
+ 	private Integer is_damage;
 }

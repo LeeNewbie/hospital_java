@@ -2,6 +2,7 @@ package com.cocosh.hos.model;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.Data;
 /**
@@ -11,7 +12,9 @@ import lombok.Data;
  */
 @Data
 public class OrderHlabel implements Serializable {
- 	private String order_id;
+ 	private String order_id;//有可能是item_id//通用
  	private String hlabel_pid;
- 	private String hlable_id;
+ 	private String hlabel_id;
+ 	//非数据库字段
+ 	private List<Hlabel> hlabes;
 }

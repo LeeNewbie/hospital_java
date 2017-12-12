@@ -201,17 +201,22 @@
                                            <option value="3">三腔</option>
                                     </select>
                                  </div>
-                                <label class="col-sm-1 control-label">兼容MRI</label>
                                 <div class="col-sm-1">
-                                   <select class="form-control" name="compatible">
-                                           <option value="1">Brady</option>
-                                           <option value="2">ICD</option>
-                                           <option value="3">CRTR</option>
-                                           <option value="4">CRTD</option>
+                                   <select class="form-control" name="brady">
+                                           <option value="1">Brady VVI</option>
+                                           <option value="2">Brady DDD</option>
+                                           <option value="3">ICD VVI</option>
+                                           <option value="4">ICD DDD</option>
+                                           <option value="5">CRTR</option>
+                                           <option value="6">CRTD</option>
                                     </select>
                                 </div>
+                                <label class="col-sm-1 control-label">兼容MRI</label>
+                                <div class="col-sm-1">
+                                                                                                              有&nbsp;<input type="checkbox" class="js-switch" name="compatible" <c:if test="${order.compatible==1 }">checked</c:if>/>&nbsp;无            
+                                </div>
                                  <label class="col-sm-1 control-label">机器序列号</label>
-                                <div class="col-sm-2">
+                                <div class="col-sm-1">
                                     <input type="text" class="form-control" name="machine_sn" value="${order.machine_sn }">
                                 </div>
                             </div>
@@ -270,8 +275,47 @@
                          
                          
                            <!-- 标签信息 -->
-                         <div class="gray-bg" id="hlabel_div" style="padding: 20px 0px;margin-bottom: 20px">
-                            <h2>标签信息</h2>
+                         <div class="gray-bg" style="padding: 20px 0px;margin-bottom: 20px">
+                            <h2>标签信息
+                                 <button class="btn btn-info" type="button" onclick="add_hlable_one()">添加一级标签</button>
+                                 <button class="btn btn-info" type="button" onclick="add_hlable_two()">添加二级标签</button>
+                            </h2>
+                           
+                             <div class="form-group" id="hlabel_div">
+                                <c:forEach items="${orderhlabels }" var="oh">
+                                  <c:if test="${empty oh.hlabel_id}">
+	                              <div class="col-sm-4 hlabel"> 
+	                                   <div class="col-sm-5">
+	                                      <select class="chosen-select" name="hlabel_pid">
+	                                         <c:forEach items="${parent_hlabels}" var="ph">
+	                                          <option value="${ph.id}" <c:if test="${ph.id==oh.hlabel_pid }">selected</c:if> >${ph.name}</option>
+	                                         </c:forEach>
+	                                     </select></div>
+	                                   <div class="col-sm-2"><button class="btn btn-warning" type="button" onclick="javascript:$(this).parents('.hlabel').remove()">删除</button></div>
+	                              </div>
+	                              </c:if>
+	                              
+	                              <c:if test="${not empty oh.hlabel_id}">
+	                              <div class="col-sm-4 hlabel"> 
+	                                   <div class="col-sm-5">
+	                                      <select class="chosen-select" name="hlabel_pid" onchange="change_hlabel_pid(this)">
+	                                         <c:forEach items="${parent_hlabels}" var="ph">
+	                                          <option value="${ph.id}" <c:if test="${ph.id==oh.hlabel_pid }">selected</c:if> >${ph.name}</option>
+	                                         </c:forEach>
+	                                     </select>
+	                                  </div>
+	                                  <div class="col-sm-5">
+	                                      <select class="chosen-select" name="hlabel_id">
+	                                         <c:forEach items="${oh.hlabes}" var="h">
+	                                          <option value="${h.id}" <c:if test="${h.id==oh.hlabel_id }">selected</c:if> >${h.name}</option>
+	                                         </c:forEach>
+	                                     </select>
+	                                  </div>
+	                                   <div class="col-sm-2"><button class="btn btn-warning" type="button" onclick="javascript:$(this).parents('.hlabel').remove()">删除</button></div>
+	                              </div>
+	                              </c:if>
+	                            </c:forEach>
+	                         </div>
                          </div>
                          
                           <!-- 术中测试 -->
@@ -282,7 +326,7 @@
 				                            <thead>
 				                                <tr>
 				                                	<th></th>
-				                                	<th>阀值</th>
+				                                	<th>阈值</th>
 				                                	<th>脉宽</th>
 				                                	<th>感知</th>
 				                                	<th>阻抗</th>
@@ -294,7 +338,7 @@
 				                            <tbody>
 				                               <tr>
 				                                 <td>心房</td>
-				                                 <td><input type="text" name="hreat_fazhi" value="${ordertest.hreat_fazhi }"></td>
+				                                 <td><input type="text" name="hreat_yuzhi" value="${ordertest.hreat_yuzhi }"></td>
 				                                 <td><input type="text" name="hreat_width" value="${ordertest.hreat_width }"></td>
 				                                 <td><input type="text" name="hreat_feel" value="${ordertest.hreat_feel }"></td>
 				                                 <td><input type="text" name="hreat_forbid" value="${ordertest.hreat_forbid }"></td>
@@ -303,7 +347,7 @@
 				                               </tr>
 				                                <tr>
 				                                 <td>右室</td>
-				                                 <td><input type="text" name="right_fazhi" value="${ordertest.right_fazhi }"></td>
+				                                 <td><input type="text" name="right_yuzhi" value="${ordertest.right_yuzhi }"></td>
 				                                 <td><input type="text" name="right_width" value="${ordertest.right_width }"></td>
 				                                 <td><input type="text" name="right_feel" value="${ordertest.right_feel }"></td>
 				                                 <td><input type="text" name="right_forbid" value="${ordertest.right_forbid }"></td>
@@ -313,7 +357,7 @@
 				                               </tr>
 				                                <tr>
 				                                 <td>左室</td>
-				                                 <td><input type="text" name="left_fazhi" value="${ordertest.left_fazhi }"></td>
+				                                 <td><input type="text" name="left_yuzhi" value="${ordertest.left_yuzhi }"></td>
 				                                 <td><input type="text" name="left_width" value="${ordertest.left_width }"></td>
 				                                 <td><input type="text" name="left_feel" value="${ordertest.left_feel }"></td>
 				                                 <td><input type="text" name="left_forbid" value="${ordertest.left_forbid }"></td>
@@ -359,19 +403,21 @@
 						                                         <option value="1" <c:if test="${h.type==1}">selected</c:if> >单极</option>
 						                                         <option value="2" <c:if test="${h.type==2}">selected</c:if>  >双极</option>
 						                                  </select></th>
-					                                	<th>脉宽 &nbsp;<button class="btn btn-warning" type="button" onclick="javascript:$(this).parents('.histest').remove()">删除</button></th>
+					                                	<th><button class="btn btn-warning" type="button" onclick="javascript:$(this).parents('.histest').remove()">删除</button></th>
 					                                </tr>
 					                            </thead>
 					                            <tbody>
 					                               <tr>
-					                                 <td>Select阀值</td>
-					                                 <td><input  type="text" name="fazhi" value="${h.fazhi }" >&nbsp;&nbsp;v</td>
-					                                 <td><input type="text" name="fazhi_width" value="${h.fazhi_width }">&nbsp;&nbsp;ms</td>
+					                                 <td>脉宽</td>
+					                                 <td><input  type="text" name="yuzhi_width" value="${h.yuzhi_width }">&nbsp;&nbsp;ms</td>
+					                               <tr>
+					                               <tr>
+					                                 <td>Select阈值</td>
+					                                 <td><input  type="text" name="yuzhi" value="${h.yuzhi }" >&nbsp;&nbsp;v</td>
 					                               </tr>
 					                               <tr>
 					                                 <td>Non-Selected阈值</td>
-					                                 <td><input  type="text" name="nofazhi" value="${h.nofazhi }">&nbsp;&nbsp;v</td>
-					                                 <td><input  type="text" name="nofazhi_width" value="${h.nofazhi_width }">&nbsp;&nbsp;ms</td>
+					                                 <td><input  type="text" name="noyuzhi" value="${h.noyuzhi }">&nbsp;&nbsp;v</td>
 					                               </tr>
 					                               <tr>
 					                                 <td>H-V间期</td>
@@ -383,7 +429,7 @@
 					                               </tr>
 					                               <tr>
 					                                 <td>损伤电流是否</td>
-					                                 <td><input  type="text" name="is_damage" value="${h.is_damage }"></td>
+					                                 <td>是&nbsp;<input type="checkbox" class="js-switch" <c:if test='${h.is_damage==1 }'>checked</c:if> name="is_damage"/>&nbsp;否</td>
 					                               </tr>
 					                            </tbody>
 					                        </table>
@@ -437,7 +483,7 @@
         $("[name='gender']").val("${order.gender}");
         $("[name='product_pid']").val("${product.name}");
         $("[name='psingle']").val("${order.psingle}");
-        $("[name='compatible']").val("${order.compatible}");
+        $("[name='brady']").val("${order.brady}");
         $("[name='hreat_location']").val("${order.hreat_location}");
         $("[name='left_location']").val("${order.left_location}");
         $("[name='right_location']").val("${order.right_location}");
@@ -452,6 +498,11 @@
         //添加his测试
         function addhistest(){
         	$("#histest_div").append(addhistest_html);
+        	//序列化标签
+            var elems = Array.prototype.slice.call($("#histest_div .histest").last().find('.js-switch'));
+            elems.forEach(function(html) {
+             var switchery = new Switchery(html);
+           });
         }
         function update(){
         	var bootstrapValidator = $("form").data('bootstrapValidator');
@@ -462,14 +513,16 @@
         	if($("[name='hreat_isfeel']").is(":checked"))hreat_isfeel=1;
         	if($("[name='left_isfeel']").is(":checked"))left_isfeel=1;
         	if($("[name='right_isfeel']").is(":checked"))right_isfeel=1;
-        	var ordertest={"id":"${ordertest.id}","hreat_fazhi":$("[name='hreat_fazhi']").val(),"hreat_width":$("[name='hreat_width']").val(),"hreat_feel":$("[name='hreat_feel']").val(),"hreat_forbid":$("[name='hreat_forbid']").val(),"hreat_isfeel":hreat_isfeel,"hreat_active":$("[name='hreat_active']").val(),
-        			"right_fazhi":$("[name='right_fazhi']").val(),"right_width":$("[name='right_width']").val(),"right_feel":$("[name='right_feel']").val(),"right_forbid":$("[name='right_forbid']").val(),"right_isfeel":right_isfeel,"right_active":$("[name='right_active']").val(),"right_high":$("[name='right_active']").val(),
-        			"left_fazhi":$("[name='left_fazhi']").val(),"left_width":$("[name='left_width']").val(),"left_feel":$("[name='left_feel']").val(),"left_forbid":$("[name='left_forbid']").val(),"left_isfeel":left_isfeel,"left_active":$("[name='left_active']").val()};
+        	var ordertest={"id":"${ordertest.id}","hreat_yuzhi":$("[name='hreat_yuzhi']").val(),"hreat_width":$("[name='hreat_width']").val(),"hreat_feel":$("[name='hreat_feel']").val(),"hreat_forbid":$("[name='hreat_forbid']").val(),"hreat_isfeel":hreat_isfeel,"hreat_active":$("[name='hreat_active']").val(),
+        			"right_yuzhi":$("[name='right_yuzhi']").val(),"right_width":$("[name='right_width']").val(),"right_feel":$("[name='right_feel']").val(),"right_forbid":$("[name='right_forbid']").val(),"right_isfeel":right_isfeel,"right_active":$("[name='right_active']").val(),"right_high":$("[name='right_active']").val(),
+        			"left_yuzhi":$("[name='left_yuzhi']").val(),"left_width":$("[name='left_width']").val(),"left_feel":$("[name='left_feel']").val(),"left_forbid":$("[name='left_forbid']").val(),"left_isfeel":left_isfeel,"left_active":$("[name='left_active']").val()};
         	var histests=[];
         	 $("#histest_div .histest").each(function(){
-        		 histests.push({"type":$(this).find("[name='histest_type']").val(),"fazhi":$(this).find("[name='fazhi']").val(),"fazhi_width":$(this).find("[name='fazhi_width']").val(),
-        			 "nofazhi":$(this).find("[name='nofazhi']").val(),"nofazhi_width":$(this).find("[name='nofazhi_width']").val(), "hv_interval":$(this).find("[name='hv_interval']").val(), 
-        			 "hpb_width":$(this).find("[name='hpb_width']").val(), "is_damage":$(this).find("[name='is_damage']").val()
+        		 var is_damage=0;
+        		 if($(this).find("[name='is_damage']").is(":checked"))is_damage=1;
+        		 histests.push({"type":$(this).find("[name='histest_type']").val(),"yuzhi":$(this).find("[name='yuzhi']").val(),"yuzhi_width":$(this).find("[name='yuzhi_width']").val(),
+        			 "noyuzhi":$(this).find("[name='noyuzhi']").val(), "hv_interval":$(this).find("[name='hv_interval']").val(), 
+        			 "hpb_width":$(this).find("[name='hpb_width']").val(), "is_damage":is_damage
         		 })
         	 
         	 })
@@ -477,9 +530,14 @@
 			$("[name='diagnose']:checked").each(function(){
 				diagnose.push($(this).attr("value"));
 			})
-			var is_change=0,have_other=0,lbbb=0;
+			 var orderhlabels=[];
+        	 $("#hlabel_div .hlabel").each(function(){
+        		 orderhlabels.push({"hlabel_pid":$(this).find("[name='hlabel_pid']").val(),"hlabel_id":$(this).find("[name='hlabel_id']").val()})
+        	 });
+			var is_change=0,have_other=0,compatible=0,lbbb=0;
 			if($("[name='is_change']").is(":checked"))is_change=1;
 			if($("[name='have_other']").is(":checked"))have_other=1;
+			if($("[name='compatible']").is(":checked"))compatible=1;
 			if($("[name='lbbb']").is(":checked"))lbbb=1;
         	var params={"id":"${order.id}","sn":$("[name='sn']").val(),"name":$("[name='name']").val(),"mobile":$("[name='mobile']").val(),"gender":$("[name='gender']").val(),"age":$("[name='age']").val(),
         			    "address":$("[name='address']").val(),"diagnose":diagnose.toString(),"diagnose_other":$("[name='diagnose_other']").val(),"plant_date":$("[name='plant_date']").val(),
@@ -487,13 +545,13 @@
         			    "is_change":is_change,"hreat_rate":$("[name='hreat_rate']").val(),"agroup":$("[name='agroup']").val(),"daoroom":$("[name='daoroom']").val(),
         			    "sanwei":$("[name='sanwei']").val(),"duodao":$("[name='duodao']").val(),"operater":$("[name='operater']").val(),"complication":$("[name='complication']").val(),
         			    "have_other":have_other,"remark":$("[name='remark']").val(),
-        			    "product_id":$("[name='product_id']").val(),"psingle":$("[name='psingle']").val(),"compatible":$("[name='compatible']").val(),"machine_sn":$("[name='machine_sn']").val(),
+        			    "product_id":$("[name='product_id']").val(),"psingle":$("[name='psingle']").val(),"brady":$("[name='brady']").val(),"compatible":compatible,"machine_sn":$("[name='machine_sn']").val(),
         			    "hreart_type":$("[name='hreart_type']").val(),"hreat_sn":$("[name='hreat_sn']").val(),"hreat_location":$("[name='hreat_location']").val(),
         			    "right_type":$("[name='right_type']").val(),"right_sn":$("[name='right_sn']").val(),"right_location":$("[name='right_location']").val(),
         			    "left_type":$("[name='left_type']").val(),"left_sn":$("[name='left_sn']").val(),"left_location":$("[name='left_location']").val(),
-        			    "hbp_location":$("[name='hbp_location']").val(),"rqs_width":$("[name='rqs_width']").val(),"lbbb":lbbb,
+        			    "hbp_location":$("[name='hbp_location']").val(),"qrs_width":$("[name='qrs_width']").val(),"lbbb":lbbb,
         			    "hbp1":$("[name='hbp1']").val(),"hbp2":$("[name='hbp2']").val(),"hbp3":$("[name='hbp3']").val(),
-        			    "ordertest":ordertest,"histests":histests}
+        			    "ordertest":ordertest,"histests":histests,"orderhlabels":orderhlabels}
         	$.ajax({
 				url:"${ctx}/manage/order/update",
 				type: "POST",
@@ -519,17 +577,16 @@
                      	html+="<th><select class=\"form-control\" name=\"histest_type\">";
                            html+="<option value=\"1\">单极</option>";
                            html+="<option value=\"2\">双极</option></select></th>";
-                 html+="<th>脉宽 &nbsp;<button class=\"btn btn-warning\" type=\"button\" onclick=\"javascript:$(this).parents('.histest').remove()\">删除</button></th>";
+                 html+="<th><button class=\"btn btn-warning\" type=\"button\" onclick=\"javascript:$(this).parents('.histest').remove()\">删除</button></th>";
                  html+="</tr> </thead>";
-                 html+="<tbody><tr><td>Select阀值</td>";
-                 html+="<td><input  type=\"text\" name=\"fazhi\">&nbsp;&nbsp;v</td>";
-                 html+="<td><input type=\"text\" name=\"fazhi_width\">&nbsp;&nbsp;ms</td></tr>";
+                 html+="<tbody><tr><td>脉宽</td><td><input type=\"text\" name=\"yuzhi_width\">&nbsp;&nbsp;ms</td></tr>";
+                 html+="<tr><td>Select阈值</td>";
+                 html+="<td><input  type=\"text\" name=\"yuzhi\">&nbsp;&nbsp;v</td></tr>";
                  html+="<tr><td>Non-Selected阈值</td>";
-                 html+="<td><input  type=\"text\" name=\"nofazhi\">&nbsp;&nbsp;v</td>";
-                 html+="<td><input  type=\"text\" name=\"nofazhi_width\">&nbsp;&nbsp;ms</td></tr>";
+                 html+="<td><input  type=\"text\" name=\"noyuzhi\">&nbsp;&nbsp;v</td></tr>";
                  html+="<tr><td>H-V间期</td><td><input  type=\"text\" name=\"hv_interval\"></td></tr>";
                  html+="<tr><td>HBP QRS宽度</td><td><input  type=\"text\" name=\"hbp_width\"></td></tr>";
-                 html+="<tr><td>损伤电流是否</td><td><input  type=\"text\" name=\"is_damage\"></td></tr>";
+                 html+="<tr><td>损伤电流是否</td><td>是&nbsp;<input type=\"checkbox\" class=\"js-switch\" name=\"is_damage\"/>&nbsp;否</td></tr>";
           html+="</tbody></table></div></div>";
           addhistest_html=html;
           selectProduct("${order.product_id}");//加载产品并选中
@@ -549,6 +606,58 @@
         		$('.chosen-select').chosen();
                 $(".chosen-select").trigger("chosen:updated");
         	})
+        }
+        
+
+        function add_hlable_one(){
+        	var hlable_parent_html="<div class=\"col-sm-4 hlabel\" > <div class=\"col-sm-5\" >";
+        	hlable_parent_html+="<select class=\"chosen-select\" name=\"hlabel_pid\">";
+        	var phlabels=eval('${phlabels}');
+        	for(var i=0;i<phlabels.length;i++){
+        		hlable_parent_html+="<option value="+phlabels[i].id+">"+phlabels[i].name+"</option>";
+        	}
+        	hlable_parent_html+="</select></div>"
+        	hlable_parent_html+="<div class=\"col-sm-2\" ><button class=\"btn btn-warning\" type=\"button\" onclick=\"javascript:$(this).parents('.hlabel').remove()\" >删除</button>";
+        	hlable_parent_html+="</div> </div>";
+        	$("#hlabel_div").append(hlable_parent_html);
+        	$('.chosen-select').chosen();
+            $(".chosen-select").trigger("chosen:updated");
+        }
+        function add_hlable_two(){
+        	var hlable_parent_html="<div class=\"col-sm-4 hlabel\" > <div class=\"col-sm-5\" >";
+        	hlable_parent_html+="<select class=\"chosen-select\" name=\"hlabel_pid\" onchange=\"change_hlabel_pid(this)\">";
+        	var phlabels=eval('${phlabels}');
+        	for(var i=0;i<phlabels.length;i++){
+        		hlable_parent_html+="<option value="+phlabels[i].id+">"+phlabels[i].name+"</option>";
+        	}
+        	hlable_parent_html+="</select></div>";
+        	hlable_parent_html+="<div class=\"col-sm-5\" ><select class=\"chosen-select\" name=\"hlabel_id\">";
+            var hlabels=eval('${hlabels}');
+        	for(var i=0;i<hlabels.length;i++){
+        		hlable_parent_html+="<option value="+hlabels[i].id+">"+hlabels[i].name+"</option>";
+        	}
+        	hlable_parent_html+="</select></div>"
+        	hlable_parent_html+="<div class=\"col-sm-2\" ><button class=\"btn btn-warning\" type=\"button\" onclick=\"javascript:$(this).parents('.hlabel').remove()\"  >删除</button>";
+        	hlable_parent_html+="</div> </div>";
+        	$("#hlabel_div").append(hlable_parent_html);
+        	$('.chosen-select').chosen();
+            $(".chosen-select").trigger("chosen:updated");
+        }
+        
+        function change_hlabel_pid(obj){
+        	var pid=$(obj).val();
+        	$.getJSON("${ctx}/manage/hlabel/queryByPid/"+pid,function(data){
+        		var option_html="";
+        		if(data.length>0){
+        			for(var i=0;i<data.length;i++){
+        				option_html+="<option value="+data[i].id+">"+data[i].name+"</option>";
+        			}
+        		}
+        		$(obj).parents(".hlabel").find("[name='hlabel_id']").html(option_html);
+        		$('.chosen-select').chosen();
+                $(".chosen-select").trigger("chosen:updated");
+        	})
+        	
         }
     </script>
 </body>
