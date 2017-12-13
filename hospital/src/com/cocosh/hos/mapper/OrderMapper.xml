@@ -87,8 +87,8 @@
 	
 	<select id="queryById" parameterType="String" resultType="com.cocosh.hos.model.Order">
 		select 
-		<include refid="Base_Column_List" /> 
-		from hos_order where id=#{id}
+		o.*,p.name product_name,p.number product_number
+		from hos_order o left join  hos_product p on o.product_id=p.id where o.id=#{id}
 	</select>
 	
 </mapper>

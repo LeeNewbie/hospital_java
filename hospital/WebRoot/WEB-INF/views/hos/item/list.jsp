@@ -32,7 +32,7 @@
                 <div class="col-sm-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>业务管理>基线表单</h5>
+                            <h5>业务管理>随访表单</h5>
 
                             <div class="ibox-tools">
                                 <a class="collapse-link">
@@ -42,12 +42,12 @@
                         </div>
                         <div class="ibox-content">
                         	<div class="ibox-tools" style="float:left;">
-                        		<shiro:hasPermission name="manage:order:add">
-                                <a class="btn btn-success btn-outline" onclick="layer_show('新增','${ctx}/manage/order/add','','','true')"><i class="fa fa-plus"></i> 新增</a>
+                        		<shiro:hasPermission name="manage:item:add">
+                                <a class="btn btn-success btn-outline" onclick="layer_show('新增产品','${ctx}/manage/product/add','','','')"><i class="fa fa-plus"></i> 新增产品</a>
                                 </shiro:hasPermission>
                                
                             </div>
-							<form action="${ctx }/manage/order/list" method="post" id="searchForm" class="pull-right mail-search" target='_self'>
+							<form action="${ctx }/manage/item/list" method="post" id="searchForm" class="pull-right mail-search" target='_self'>
 		                        <div class="input-group">
 		                            <input type="text" class="form-control input-sm" name="keywords" value="${vo.keywords}" placeholder="姓名，病历号，序列号">
 		                            <input type="hidden" name="pageNo" value="${vo.pageNo }"/>
@@ -61,33 +61,34 @@
                                 <thead>
                                 <tr>
                                 	<th width="30"><input type="checkbox" class="i-checks" name="input"></th>
-                                    <th>姓名</th>
+                                    <th>名称</th>
                                     <th>病历号</th>
                                     <th>机器序列号</th>
+                                    <th>厂家</th>
+                                    <th>型号</th>
                                     <th>术者</th>
-                                    <th>植入日期</th>
-                                    <th>首次随访日期</th>
-                                    <th>提交日期</th>
-                                    <th>操作</th>
+                                    <th>随访日期</th>
+                                    <th>下次随访日期</th>
+                                    <th></th>
+                                    <th width="130">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${page.result }" var="o">
+                                <c:forEach items="${page.result }" var="p">
                                 <tr>
-                                	<td><input type="checkbox" class="i-checks" name="input[]" value="${o.id }"></td>
-                                     <td>${o.name }</td>
-                                     <td>${o.sn}</td>
-                                     <td>${o.machine_sn }</td>
-                                     <td>${o.operater}</td>
-                                     <td><fmt:formatDate value="${o.plant_date }" pattern="yyyy-MM-dd"/></td>
-                                    <td><fmt:formatDate value="${o.first_date }" pattern="yyyy-MM-dd"/></td>
-                                    <td><fmt:formatDate value="${o.create_date }" pattern="yyyy-MM-dd"/></td>
+                                	<td><input type="checkbox" class="i-checks" name="input[]" value="${p.id }"></td>
+                                     <td>${p.name }</td>
+                                     <td>${p.sn}</td>
+                                     <td>${p.marchine_sn }</td>
+                                     <td>${p.product_name }</td>
+                                     <td>${p.product_number }</td>
+                                     <td>${p.operater }</td>
+                                     <td><fmt:formatDate value="${p.visit_date }" pattern="yyyy-MM-dd"/></td>
+                                     <td><fmt:formatDate value="${p.next_date }" pattern="yyyy-MM-dd"/></td>
+                                    <td>${p.mobile }</td>
                                     <td>
-                                    	<shiro:hasPermission name="manage:order:update">
-                                    	<a class="btn btn-xs btn-white" onclick="layer_show('修改','${ctx}/manage/order/update/${o.id }','','','true')"><i class="fa fa-pencil"></i> 修改</a>
-                                    	</shiro:hasPermission>
-                                    	<shiro:hasPermission name="manage:item:add">
-                                    	<a class="btn btn-xs btn-white" onclick="layer_show('随访表单录入','${ctx}/manage/item/add/${o.id }','','','true')"><i class="fa fa-plus"></i> 录入随访</a>
+                                    	<shiro:hasPermission name="manage:item:update">
+                                    	<a class="btn btn-xs btn-white" onclick="layer_show('修改','${ctx}/manage/item/update/${p.id }','','','')"><i class="fa fa-pencil"></i> 修改</a>
                                     	</shiro:hasPermission>
                                     </td>
                                 </tr>
@@ -95,7 +96,7 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="10" id="pagination"></td>
+                                    <td colspan="8" id="pagination"></td>
                                 </tr>
                                 </tfoot>
                             </table>

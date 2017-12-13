@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cocosh.hos.mapper.ItemBradyMapper">
+	<sql id="Base_Column_List">
+		item_id,work_mode,basic_rate,up_rate,rest_rate,late_rate,qibo_av,feel_av,av_period,hreat_out,hreat_width,hreat_yuzhi,hreat_sensive,hreat_feel,hreat_forbid,right_out,right_width,right_yuzhi,right_sensive,right_feel,right_forbid,left_out,left_width,left_yuzhi,left_sensive,left_feel,left_forbid
+	</sql>
+	
+	<insert id="add" parameterType="com.cocosh.hos.model.ItemBrady">
+		insert into hos_item_brady(item_id,work_mode,basic_rate,up_rate,rest_rate,late_rate,qibo_av,feel_av,av_period,hreat_out,hreat_width,hreat_yuzhi,hreat_sensive,hreat_feel,hreat_forbid,right_out,right_width,right_yuzhi,right_sensive,right_feel,right_forbid,left_out,left_width,left_yuzhi,left_sensive,left_feel,left_forbid)
+		values(#{item_id},#{work_mode},#{basic_rate},#{up_rate},#{rest_rate},#{late_rate},#{qibo_av},#{feel_av},#{av_period},#{hreat_out},#{hreat_width},#{hreat_yuzhi},#{hreat_sensive},#{hreat_feel},#{hreat_forbid},#{right_out},#{right_width},#{right_yuzhi},#{right_sensive},#{right_feel},#{right_forbid},#{left_out},#{left_width},#{left_yuzhi},#{left_sensive},#{left_feel},#{left_forbid})
+	</insert>
+	
+	<delete id="del">
+		delete from hos_item_brady where id in 
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach> 
+	</delete>
+	
+	<update id="update" parameterType="com.cocosh.hos.model.ItemBrady">
+		update hos_item_brady 
+		<set>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(item_id)">item_id=#{item_id},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(work_mode)">work_mode=#{work_mode},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(basic_rate)">basic_rate=#{basic_rate},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(up_rate)">up_rate=#{up_rate},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(rest_rate)">rest_rate=#{rest_rate},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(late_rate)">late_rate=#{late_rate},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(qibo_av)">qibo_av=#{qibo_av},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(feel_av)">feel_av=#{feel_av},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(av_period)">av_period=#{av_period},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_out)">hreat_out=#{hreat_out},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_width)">hreat_width=#{hreat_width},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_yuzhi)">hreat_yuzhi=#{hreat_yuzhi},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_sensive)">hreat_sensive=#{hreat_sensive},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_feel)">hreat_feel=#{hreat_feel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_forbid)">hreat_forbid=#{hreat_forbid},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_out)">right_out=#{right_out},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_width)">right_width=#{right_width},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_yuzhi)">right_yuzhi=#{right_yuzhi},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_sensive)">right_sensive=#{right_sensive},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_feel)">right_feel=#{right_feel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(right_forbid)">right_forbid=#{right_forbid},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_out)">left_out=#{left_out},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_width)">left_width=#{left_width},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_yuzhi)">left_yuzhi=#{left_yuzhi},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_sensive)">left_sensive=#{left_sensive},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_feel)">left_feel=#{left_feel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_forbid)">left_forbid=#{left_forbid},</if>
+		</set> 
+		 where item_id=#{item_id}
+	</update>
+	
+	<select id="queryPage" parameterType="vo" resultType="com.cocosh.hos.model.ItemBrady">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_item_brady 
+		<where>
+			<if test="keywords!=null and keywords!=''">name like '%${keywords}%'</if>
+		</where>
+		<choose>
+			<when test="orderField !=null and orderField !=''">
+				 order by ${orderField} 
+				 <if test="orderDirection != null and orderDirection != ''">${orderDirection}</if>
+			</when>
+			<otherwise>
+				 order by create_date desc 
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="queryByItemId" parameterType="String" resultType="com.cocosh.hos.model.ItemBrady">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_item_brady where item_id=#{item_id}
+	</select>
+	
+</mapper>

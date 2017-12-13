@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cocosh.hos.mapper.ItemIcdMapper">
+	<sql id="Base_Column_List">
+		item_id,vt1_name,vt1_ison,vt1_rate,vt1_period,vt1_identify,vt1_scheme,vt2_name,vt2_ison,vt2_rate,vt2_period,vt2_identify,vt2_scheme,vf_name,vf_ison,vf_rate,vf_period,vf_identify,vf_scheme,crt_ischange,crt_left,crt_sav,crt_period,crt_width
+	</sql>
+	
+	<insert id="add" parameterType="com.cocosh.hos.model.ItemIcd">
+		insert into hos_item_icd(item_id,vt1_name,vt1_ison,vt1_rate,vt1_period,vt1_identify,vt1_scheme,vt2_name,vt2_ison,vt2_rate,vt2_period,vt2_identify,vt2_scheme,vf_name,vf_ison,vf_rate,vf_period,vf_identify,vf_scheme,crt_ischange,crt_left,crt_sav,crt_period,crt_width)
+		values(#{item_id},#{vt1_name},#{vt1_ison},#{vt1_rate},#{vt1_period},#{vt1_identify},#{vt1_scheme},#{vt2_name},#{vt2_ison},#{vt2_rate},#{vt2_period},#{vt2_identify},#{vt2_scheme},#{vf_name},#{vf_ison},#{vf_rate},#{vf_period},#{vf_identify},#{vf_scheme},#{crt_ischange},#{crt_left},#{crt_sav},#{crt_period},#{crt_width})
+	</insert>
+	
+	<delete id="del">
+		delete from hos_item_icd where item_id in 
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach> 
+	</delete>
+	
+	<update id="update" parameterType="com.cocosh.hos.model.ItemIcd">
+		update hos_item_icd 
+		<set>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(item_id)">item_id=#{item_id},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vt1_name)">vt1_name=#{vt1_name},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vt1_ison)">vt1_ison=#{vt1_ison},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vt1_rate)">vt1_rate=#{vt1_rate},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vt1_period)">vt1_period=#{vt1_period},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vt1_identify)">vt1_identify=#{vt1_identify},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vt1_scheme)">vt1_scheme=#{vt1_scheme},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vt2_name)">vt2_name=#{vt2_name},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vt2_ison)">vt2_ison=#{vt2_ison},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vt2_rate)">vt2_rate=#{vt2_rate},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vt2_period)">vt2_period=#{vt2_period},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vt2_identify)">vt2_identify=#{vt2_identify},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vt2_scheme)">vt2_scheme=#{vt2_scheme},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vf_name)">vf_name=#{vf_name},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vf_ison)">vf_ison=#{vf_ison},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vf_rate)">vf_rate=#{vf_rate},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vf_period)">vf_period=#{vf_period},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vf_identify)">vf_identify=#{vf_identify},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vf_scheme)">vf_scheme=#{vf_scheme},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(crt_ischange)">crt_ischange=#{crt_ischange},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(crt_left)">crt_left=#{crt_left},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(crt_sav)">crt_sav=#{crt_sav},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(crt_period)">crt_period=#{crt_period},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(crt_width)">crt_width=#{crt_width},</if>
+		</set> 
+		 where item_id=#{item_id}
+	</update>
+	
+	
+	
+	<select id="queryByItemId" parameterType="String" resultType="com.cocosh.hos.model.ItemIcd">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_item_icd where item_id=#{item_id}
+	</select>
+	
+</mapper>

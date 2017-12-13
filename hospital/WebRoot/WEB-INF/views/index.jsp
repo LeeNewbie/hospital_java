@@ -122,6 +122,11 @@
                             	<a class="J_menuItem" href="${ctx }/manage/order/list">基线表单</a>
                             </li>
                             </shiro:hasPermission>
+                            <shiro:hasPermission name="manage:item:list">
+                            <li>
+                            	<a class="J_menuItem" href="${ctx }/manage/item/list">随访表单</a>
+                            </li>
+                            </shiro:hasPermission>
                         </ul>
                     </li>
                     </shiro-ex:hasAnyPermissions>

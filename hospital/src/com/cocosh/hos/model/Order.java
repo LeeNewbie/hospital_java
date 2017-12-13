@@ -66,5 +66,7 @@ public class Order extends BaseEntity {
  	private OrderTest ordertest;
  	private List<OrderHistest> histests;
  	private List<OrderHlabel> orderhlabels;
+ 	private String product_name;
+ 	private String product_number;
  	
 }

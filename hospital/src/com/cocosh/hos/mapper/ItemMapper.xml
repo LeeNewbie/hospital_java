@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cocosh.hos.mapper.ItemMapper">
+	<sql id="Base_Column_List">
+		id,order_id,visit_date,nex_date,situation,situation_img,hreat_chao,hreat_img,rabat,rabat_img,elect,elect_img,blood,blood_img,have_other,other,other_img,magnet,magnet_img,check_location,check_unit,mri_mode,mri_house,mri_room,mri_rate,mri_width_house,mri_width_room,mri_period,mri_set_house,mri_set_room,is_moresix,is_hard,is_check,sar,before_house_yuzhi,before_house_feel,before_hous_forbid,befor_room_yuzhi,before_room_feel,before_room_forbid,after_house_yuzhi,after_house_feel,after_hous_forbid,after_room_yuzhi,after_room_feel,after_room_forbid,remark,ajust_remark,create_date,modify_date
+	</sql>
+	
+	<insert id="add" parameterType="com.cocosh.hos.model.Item">
+		insert into hos_item(id,order_id,visit_date,nex_date,situation,situation_img,hreat_chao,hreat_img,rabat,rabat_img,elect,elect_img,blood,blood_img,have_other,other,other_img,magnet,magnet_img,check_location,check_unit,mri_mode,mri_house,mri_room,mri_rate,mri_width_house,mri_width_room,mri_period,mri_set_house,mri_set_room,is_moresix,is_hard,is_check,sar,before_house_yuzhi,before_house_feel,before_hous_forbid,befor_room_yuzhi,before_room_feel,before_room_forbid,after_house_yuzhi,after_house_feel,after_hous_forbid,after_room_yuzhi,after_room_feel,after_room_forbid,remark,ajust_remark,create_date,modify_date)
+		values(#{id},#{order_id},#{visit_date},#{nex_date},#{situation},#{situation_img},#{hreat_chao},#{hreat_img},#{rabat},#{rabat_img},#{elect},#{elect_img},#{blood},#{blood_img},#{have_other},#{other},#{other_img},#{magnet},#{magnet_img},#{check_location},#{check_unit},#{mri_mode},#{mri_house},#{mri_room},#{mri_rate},#{mri_width_house},#{mri_width_room},#{mri_period},#{mri_set_house},#{mri_set_room},#{is_moresix},#{is_hard},#{is_check},#{sar},#{before_house_yuzhi},#{before_house_feel},#{before_hous_forbid},#{befor_room_yuzhi},#{before_room_feel},#{before_room_forbid},#{after_house_yuzhi},#{after_house_feel},#{after_hous_forbid},#{after_room_yuzhi},#{after_room_feel},#{after_room_forbid},#{remark},#{ajust_remark},now(),now())
+	</insert>
+	
+	<delete id="del">
+		delete from hos_item where id in 
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach> 
+	</delete>
+	
+	<update id="update" parameterType="com.cocosh.hos.model.Item">
+		update hos_item 
+		<set>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(order_id)">order_id=#{order_id},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(visit_date)">visit_date=#{visit_date},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(nex_date)">nex_date=#{nex_date},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(situation)">situation=#{situation},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(situation_img)">situation_img=#{situation_img},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_chao)">hreat_chao=#{hreat_chao},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_img)">hreat_img=#{hreat_img},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(rabat)">rabat=#{rabat},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(rabat_img)">rabat_img=#{rabat_img},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(elect)">elect=#{elect},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(elect_img)">elect_img=#{elect_img},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(blood)">blood=#{blood},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(blood_img)">blood_img=#{blood_img},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(have_other)">have_other=#{have_other},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(other)">other=#{other},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(other_img)">other_img=#{other_img},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(magnet)">magnet=#{magnet},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(magnet_img)">magnet_img=#{magnet_img},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(check_location)">check_location=#{check_location},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(check_unit)">check_unit=#{check_unit},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(mri_mode)">mri_mode=#{mri_mode},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(mri_house)">mri_house=#{mri_house},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(mri_room)">mri_room=#{mri_room},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(mri_rate)">mri_rate=#{mri_rate},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(mri_width_house)">mri_width_house=#{mri_width_house},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(mri_width_room)">mri_width_room=#{mri_width_room},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(mri_period)">mri_period=#{mri_period},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(mri_set_house)">mri_set_house=#{mri_set_house},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(mri_set_room)">mri_set_room=#{mri_set_room},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(is_moresix)">is_moresix=#{is_moresix},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(is_hard)">is_hard=#{is_hard},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(is_check)">is_check=#{is_check},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(sar)">sar=#{sar},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(before_house_yuzhi)">before_house_yuzhi=#{before_house_yuzhi},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(before_house_feel)">before_house_feel=#{before_house_feel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(before_hous_forbid)">before_hous_forbid=#{before_hous_forbid},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(befor_room_yuzhi)">befor_room_yuzhi=#{befor_room_yuzhi},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(before_room_feel)">before_room_feel=#{before_room_feel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(before_room_forbid)">before_room_forbid=#{before_room_forbid},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(after_house_yuzhi)">after_house_yuzhi=#{after_house_yuzhi},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(after_house_feel)">after_house_feel=#{after_house_feel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(after_hous_forbid)">after_hous_forbid=#{after_hous_forbid},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(after_room_yuzhi)">after_room_yuzhi=#{after_room_yuzhi},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(after_room_feel)">after_room_feel=#{after_room_feel},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(after_room_forbid)">after_room_forbid=#{after_room_forbid},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(remark)">remark=#{remark},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(ajust_remark)">ajust_remark=#{ajust_remark},</if>
+		</set> 
+		,modify_date=now() where id=#{id}
+	</update>
+	
+	<select id="queryPage" parameterType="vo" resultType="Map">
+		select t.id, t.visit_date,t.nex_date,o.name,o.sn,o.operater,o.mobile,o.machine_sn,p.name product_name,p.number product_number
+		from hos_item t left join hos_order o on t.order_id=o.id
+		                left join hos_product  p on o.product_id= p.id 
+		<where>
+			<if test="keywords!=null and keywords!=''">(o.name like '%${keywords}%' or o.sn like '%${keywords}%' or o.machine_sn like '%${keywords}%')</if>
+		</where>
+		<choose>
+			<when test="orderField !=null and orderField !=''">
+				 order by ${orderField} 
+				 <if test="orderDirection != null and orderDirection != ''">${orderDirection}</if>
+			</when>
+			<otherwise>
+				 order by t.create_date desc 
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="queryById" parameterType="String" resultType="com.cocosh.hos.model.Item">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_item where id=#{id}
+	</select>
+	
+</mapper>

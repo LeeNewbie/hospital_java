@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cocosh.hos.mapper.ItemDiagnoseMapper">
+	<sql id="Base_Column_List">
+		item_id,ap,vp,bp,asvp,asvs,apvp,apvs,pvc,ams,exchange,ataf,vsr
+	</sql>
+	
+	<insert id="add" parameterType="com.cocosh.hos.model.ItemDiagnose">
+		insert into hos_item_diagnose(item_id,ap,vp,bp,asvp,asvs,apvp,apvs,pvc,ams,exchange,ataf,vsr)
+		values(#{item_id},#{ap},#{vp},#{bp},#{asvp},#{asvs},#{apvp},#{apvs},#{pvc},#{ams},#{exchange},#{ataf},#{vsr})
+	</insert>
+	
+	<delete id="del">
+		delete from hos_item_diagnose where id in 
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach> 
+	</delete>
+	
+	<update id="update" parameterType="com.cocosh.hos.model.ItemDiagnose">
+		update hos_item_diagnose 
+		<set>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(item_id)">item_id=#{item_id},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(ap)">ap=#{ap},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vp)">vp=#{vp},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(bp)">bp=#{bp},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(asvp)">asvp=#{asvp},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(asvs)">asvs=#{asvs},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(apvp)">apvp=#{apvp},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(apvs)">apvs=#{apvs},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(pvc)">pvc=#{pvc},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(ams)">ams=#{ams},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(exchange)">exchange=#{exchange},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(ataf)">ataf=#{ataf},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(vsr)">vsr=#{vsr},</if>
+		</set> 
+		where item_id=#{item_id}
+	</update>
+	
+	
+	
+	<select id="queryByItemId" parameterType="String" resultType="com.cocosh.hos.model.ItemDiagnose">
+		select 
+		<include refid="Base_Column_List" /> 
+		from hos_item_diagnose where otem_id=#{item_id}
+	</select>
+	
+</mapper>
