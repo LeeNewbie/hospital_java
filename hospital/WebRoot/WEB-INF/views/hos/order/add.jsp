@@ -338,7 +338,7 @@
                          </div>
                          
                            <!-- HIS测试 -->
-                         <div class="gray-bg" id="hlabel_div" style="padding: 20px 0px;margin-bottom: 20px">
+                         <div class="gray-bg"  style="padding: 20px 0px;margin-bottom: 20px">
                             <h2>HIS测试</h2>
                             <div class="hr-line-dashed"></div>
                              <div class="form-group">
