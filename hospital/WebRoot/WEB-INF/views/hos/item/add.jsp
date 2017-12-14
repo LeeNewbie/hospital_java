@@ -86,7 +86,7 @@
                                 </div>
                                 <label class="col-sm-2 control-label">下次随访日期</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control"  name="nex_date">
+                                    <input type="text" class="form-control"  name="next_date">
                                 </div>
                             </div>
                       </div>
@@ -568,7 +568,7 @@
                    </div>
                    
                    <!-- HIS测试 -->
-                       <div class="gray-bg" id="hlabel_div" style="padding: 20px 0px;margin-bottom: 20px">
+                       <div class="gray-bg" style="padding: 20px 0px;margin-bottom: 20px">
                           <h2>HIS测试</h2>
                            <div class="form-group">
                              <label class="col-sm-2 control-label">HBP接口位置</label>
@@ -784,6 +784,7 @@
           })
         }
         function add(){
+        	alert($("[name='crt_sav']").val());
         	var bootstrapValidator = $("form").data('bootstrapValidator');
 	        bootstrapValidator.validate();
 	        if(!bootstrapValidator.isValid())return;
@@ -812,7 +813,7 @@
         	var icd={"vt1_name":$("[name='vt1_name']").val(),"vt1_ison":vt1_ison,"vt1_rate":$("[name='vt1_rate']").val(),"vt1_period":$("[name='vt1_period']").val(),"vt1_identify":$("[name='vt1_identify']").val(),"vt1_scheme":$("[name='vt1_scheme']").val(),
         			"vt2_name":$("[name='vt2_name']").val(),"vt2_ison":vt1_ison,"vt2_rate":$("[name='vt2_rate']").val(),"vt2_period":$("[name='vt2_period']").val(),"vt2_identify":$("[name='vt2_identify']").val(),"vt2_scheme":$("[name='vt2_scheme']").val(),
         			"vf_name":$("[name='vf_name']").val(),"vf_ison":vf_ison,"vf_rate":$("[name='vf_rate']").val(),"vf_period":$("[name='vf_period']").val(),"vf_identify":$("[name='vt1_identify']").val(),"vf_scheme":$("[name='vt1_scheme']").val(),
-        			"crt_ischange":crt_ischange,"crt_left":$("[name='crt_left']").val(),"crt_sav":$("[name='crt_sav']"),"crt_period":$("[name='crt_period']").val(),"crt_width":$("[name='crt_width']").val()
+        			"crt_ischange":crt_ischange,"crt_left":$("[name='crt_left']").val(),"crt_sav":$("[name='crt_sav']").val(),"crt_period":$("[name='crt_period']").val(),"crt_width":$("[name='crt_width']").val()
         	};
         	var diagnose={"ap":$("[name='ap']").val(),"vp":$("[name='vp']").val(),"bp":$("[name='bp']").val(),"asvp":$("[name='asvp']").val(),"asvs":$("[name='asvs']").val(),"apvp":$("[name='apvp']").val(),"apvs":$("[name='apvs']").val(),
         			"pvc":$("[name='pvc']").val(),	"ams":$("[name='ams']").val(),"exchange":$("[name='exchange']").val(),	"ataf":$("[name='ataf']").val(),"vsr":$("[name='vsr']").val()	  
