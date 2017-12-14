@@ -118,7 +118,7 @@ public class ItemController extends BaseController {
 	@RequiresPermissions("manage:item:update")
 	@RequestMapping("update")
 	@ResponseBody
-	public AjaxResult update(Item po) {
+	public AjaxResult update(@RequestBody Item po) {
 		if (service.update(po)) {
 			return new AjaxResult("0");
 		} else {
