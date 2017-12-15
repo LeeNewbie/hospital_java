@@ -29,7 +29,7 @@ public class ItemTest implements Serializable {
  	private String left_test_feel;
  	private Integer left_test_isfar;
  	private String left_test_forbid;
- 	private String hpb_location;
+ 	private String hbp_location;
  	private String hbp1;
  	private String hbp2;
  	private String hbp3;

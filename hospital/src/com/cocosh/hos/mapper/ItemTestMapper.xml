@@ -3,12 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cocosh.hos.mapper.ItemTestMapper">
 	<sql id="Base_Column_List">
-		item_id,predict_life,elect_press,elect_forbid,elect_time,self_rate,magnet_rate,hreat_test_yuzhi,hreat_test_width,hreat_test_feel,hreat_test_isfar,hreat_test_forbid,right_test_yuzhi,right_test_width,right_test_feel,right_test_isfar,right_test_forbid,right_test_hign,left_test_yuzhi,left_test_width,left_test_feel,left_test_isfar,left_test_forbid,hpb_location,hbp1,hbp2,hbp3,hp_percent,lvef,lvesv,lvedd,rvd1,rvd2,rvd3,rvd_area,rvfac,tapse,rvs,rvivv,rviva,mid_rv,mid_rvsr
+		item_id,predict_life,elect_press,elect_forbid,elect_time,self_rate,magnet_rate,hreat_test_yuzhi,hreat_test_width,hreat_test_feel,hreat_test_isfar,hreat_test_forbid,right_test_yuzhi,right_test_width,right_test_feel,right_test_isfar,right_test_forbid,right_test_hign,left_test_yuzhi,left_test_width,left_test_feel,left_test_isfar,left_test_forbid,hbp_location,hbp1,hbp2,hbp3,hp_percent,lvef,lvesv,lvedd,rvd1,rvd2,rvd3,rvd_area,rvfac,tapse,rvs,rvivv,rviva,mid_rv,mid_rvsr
 	</sql>
 	
 	<insert id="add" parameterType="com.cocosh.hos.model.ItemTest">
-		insert into hos_item_test(item_id,predict_life,elect_press,elect_forbid,elect_time,self_rate,magnet_rate,hreat_test_yuzhi,hreat_test_width,hreat_test_feel,hreat_test_isfar,hreat_test_forbid,right_test_yuzhi,right_test_width,right_test_feel,right_test_isfar,right_test_forbid,right_test_hign,left_test_yuzhi,left_test_width,left_test_feel,left_test_isfar,left_test_forbid,hpb_location,hbp1,hbp2,hbp3,hp_percent,lvef,lvesv,lvedd,rvd1,rvd2,rvd3,rvd_area,rvfac,tapse,rvs,rvivv,rviva,mid_rv,mid_rvsr)
-		values(#{item_id},#{predict_life},#{elect_press},#{elect_forbid},#{elect_time},#{self_rate},#{magnet_rate},#{hreat_test_yuzhi},#{hreat_test_width},#{hreat_test_feel},#{hreat_test_isfar},#{hreat_test_forbid},#{right_test_yuzhi},#{right_test_width},#{right_test_feel},#{right_test_isfar},#{right_test_forbid},#{right_test_hign},#{left_test_yuzhi},#{left_test_width},#{left_test_feel},#{left_test_isfar},#{left_test_forbid},#{hpb_location},#{hbp1},#{hbp2},#{hbp3},#{hp_percent},#{lvef},#{lvesv},#{lvedd},#{rvd1},#{rvd2},#{rvd3},#{rvd_area},#{rvfac},#{tapse},#{rvs},#{rvivv},#{rviva},#{mid_rv},#{mid_rvsr})
+		insert into hos_item_test(item_id,predict_life,elect_press,elect_forbid,elect_time,self_rate,magnet_rate,hreat_test_yuzhi,hreat_test_width,hreat_test_feel,hreat_test_isfar,hreat_test_forbid,right_test_yuzhi,right_test_width,right_test_feel,right_test_isfar,right_test_forbid,right_test_hign,left_test_yuzhi,left_test_width,left_test_feel,left_test_isfar,left_test_forbid,hbp_location,hbp1,hbp2,hbp3,hp_percent,lvef,lvesv,lvedd,rvd1,rvd2,rvd3,rvd_area,rvfac,tapse,rvs,rvivv,rviva,mid_rv,mid_rvsr)
+		values(#{item_id},#{predict_life},#{elect_press},#{elect_forbid},#{elect_time},#{self_rate},#{magnet_rate},#{hreat_test_yuzhi},#{hreat_test_width},#{hreat_test_feel},#{hreat_test_isfar},#{hreat_test_forbid},#{right_test_yuzhi},#{right_test_width},#{right_test_feel},#{right_test_isfar},#{right_test_forbid},#{right_test_hign},#{left_test_yuzhi},#{left_test_width},#{left_test_feel},#{left_test_isfar},#{left_test_forbid},#{hbp_location},#{hbp1},#{hbp2},#{hbp3},#{hp_percent},#{lvef},#{lvesv},#{lvedd},#{rvd1},#{rvd2},#{rvd3},#{rvd_area},#{rvfac},#{tapse},#{rvs},#{rvivv},#{rviva},#{mid_rv},#{mid_rvsr})
 	</insert>
 	
 	<delete id="del">
@@ -44,7 +44,7 @@
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_test_feel)">left_test_feel=#{left_test_feel},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_test_isfar)">left_test_isfar=#{left_test_isfar},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(left_test_forbid)">left_test_forbid=#{left_test_forbid},</if>
-			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hpb_location)">hpb_location=#{hpb_location},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hbp_location)">hbp_location=#{hbp_location},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hbp1)">hbp1=#{hbp1},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hbp2)">hbp2=#{hbp2},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hbp3)">hbp3=#{hbp3},</if>

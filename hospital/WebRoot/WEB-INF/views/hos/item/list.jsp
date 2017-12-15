@@ -79,7 +79,7 @@
                                 	<td><input type="checkbox" class="i-checks" name="input[]" value="${p.id }"></td>
                                      <td>${p.name }</td>
                                      <td>${p.sn}</td>
-                                     <td>${p.marchine_sn }</td>
+                                     <td>${p.machine_sn }</td>
                                      <td>${p.product_name }</td>
                                      <td>${p.product_number }</td>
                                      <td>${p.operater }</td>
@@ -88,7 +88,7 @@
                                     <td>${p.mobile }</td>
                                     <td>
                                     	<shiro:hasPermission name="manage:item:update">
-                                    	<a class="btn btn-xs btn-white" onclick="layer_show('修改','${ctx}/manage/item/update/${p.id }','','','')"><i class="fa fa-pencil"></i> 修改</a>
+                                    	<a class="btn btn-xs btn-white" onclick="layer_show('修改','${ctx}/manage/item/update/${p.id }','','','true')"><i class="fa fa-pencil"></i> 修改</a>
                                     	</shiro:hasPermission>
                                     </td>
                                 </tr>

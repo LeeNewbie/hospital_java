@@ -8,6 +8,7 @@ import com.cocosh.hos.model.ItemDrug;
 public interface ItemDrugMapper {
 	Integer add(ItemDrug po);
 	Integer del(String[] ids);
+	Integer delByItemId(String item_id);
 	Integer update(ItemDrug po);
-	ItemDrug queryByItemId(String item_id);
+	List<ItemDrug> queryByItemId(String item_id);
 }

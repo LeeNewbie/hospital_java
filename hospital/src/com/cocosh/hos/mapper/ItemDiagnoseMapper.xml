@@ -43,7 +43,7 @@
 	<select id="queryByItemId" parameterType="String" resultType="com.cocosh.hos.model.ItemDiagnose">
 		select 
 		<include refid="Base_Column_List" /> 
-		from hos_item_diagnose where otem_id=#{item_id}
+		from hos_item_diagnose where item_id=#{item_id}
 	</select>
 	
 </mapper>

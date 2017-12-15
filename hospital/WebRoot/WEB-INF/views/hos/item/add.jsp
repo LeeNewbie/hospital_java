@@ -32,6 +32,7 @@
     <style type="text/css">
       .invoice-table input{width: 80px;height: 30px}
      .myinput{height: 30px;width:80px;margin-right: 5px}
+     .imagesdiv img{width:50px;height: 50px;margin-right: 5px;}
    </style>
 </head>
 
@@ -46,36 +47,36 @@
                          <div class="form-group">
                                 <label class="col-sm-2 control-label">病历号</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" value="${order.sn }">
+                                    <input type="text" class="form-control" value="${order.sn }" readonly="readonly">
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">姓名</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control"  value="${order.name}">
+                                    <input type="text" class="form-control"  value="${order.name}" readonly="readonly">
                                 </div>
                                 <label class="col-sm-2 control-label">联系方式</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control"  value="${order.mobile}">
+                                    <input type="text" class="form-control"  value="${order.mobile}" readonly="readonly">
                                 </div>
                                 <label class="col-sm-2 control-label">植入日期</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control"  value="<fmt:formatDate value='${order.plant_date }' pattern='yyyy-MM-dd'/>">
+                                    <input type="text" class="form-control"  value="<fmt:formatDate value='${order.plant_date }' pattern='yyyy-MM-dd'/>" readonly="readonly">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">植入品牌</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control"  value="${order.product_name}">
+                                    <input type="text" class="form-control"  value="${order.product_name}" readonly="readonly">
                                 </div>
                                 <label class="col-sm-2 control-label">植入型号</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control"  value="${order.product_number}">
+                                    <input type="text" class="form-control"  value="${order.product_number}" readonly="readonly">
                                 </div>
                                 <label class="col-sm-2 control-label">序列号</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control"  value="${order.machine_sn }">
+                                    <input type="text" class="form-control"  value="${order.machine_sn }" readonly="readonly">
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -98,45 +99,50 @@
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control"  name="situation">
                                 </div>
-                                <div class="col-sm-8 imagesdiv">
+                                <div class="col-sm-2">
                                     <input class="fileInput" id="situation_img" type="file" name="file" multiple="multiple" accept="image/*"/>
                                 </div>
+                                 <div class="col-sm-6 imagesdiv"></div>
                         </div>
                         <div class="form-group">
                                 <label class="col-sm-2 control-label">心超</label>
                                 <div class="col-sm-2">
                                                                                                       是&nbsp;<input type="checkbox" class="js-switch" name="hreat_chao"/>&nbsp;否 
                                 </div>
-                                <div class="col-sm-8 imagesdiv">
+                                <div class="col-sm-2">
                                     <input class="fileInput" id="hreat_img" type="file" name="file" multiple="multiple" accept="image/*"/>
                                 </div>
+                                 <div class="col-sm-6 imagesdiv"></div>
                         </div>
                         <div class="form-group">
                                 <label class="col-sm-2 control-label">胸片</label>
                                 <div class="col-sm-2">
                                                                                                       是&nbsp;<input type="checkbox" class="js-switch" name="rabat"/>&nbsp;否 
                                 </div>
-                                <div class="col-sm-8 imagesdiv">
+                                <div class="col-sm-2">
                                     <input class="fileInput" id="rabat_img" type="file" name="file" multiple="multiple" accept="image/*"/>
                                 </div>
+                                 <div class="col-sm-6 imagesdiv"></div>
                         </div>
                         <div class="form-group">
                                 <label class="col-sm-2 control-label">心电图</label>
                                 <div class="col-sm-2">
                                                                                                       是&nbsp;<input type="checkbox" class="js-switch" name="elect"/>&nbsp;否 
                                 </div>
-                                <div class="col-sm-8 imagesdiv">
+                                <div class="col-sm-2">
                                     <input class="fileInput" id="elect_img" type="file" name="file" multiple="multiple" accept="image/*"/>
                                 </div>
+                                 <div class="col-sm-6 imagesdiv"></div>
                         </div>
                         <div class="form-group">
                                 <label class="col-sm-2 control-label">血检</label>
                                 <div class="col-sm-2">
                                                                                                       是&nbsp;<input type="checkbox" class="js-switch" name="blood"/>&nbsp;否 
                                 </div>
-                                <div class="col-sm-8 imagesdiv">
+                                <div class="col-sm-2">
                                     <input class="fileInput" id="blood_img" type="file" name="file" multiple="multiple" accept="image/*"/>
                                 </div>
+                                 <div class="col-sm-6 imagesdiv"></div>
                         </div>
                         <div class="form-group">
                                 <label class="col-sm-2 control-label">其他</label>
@@ -146,18 +152,20 @@
                                  <div class="col-sm-2">
                                     <input type="text" class="form-control"  name="other">
                                 </div>
-                                <div class="col-sm-6 imagesdiv">
+                                <div class="col-sm-2">
                                     <input class="fileInput" id="other_img" type="file" name="file" multiple="multiple" accept="image/*"/>
                                 </div>
+                                 <div class="col-sm-4 imagesdiv"></div>
                         </div>
                         <div class="form-group">
                                 <label class="col-sm-2 control-label">磁共振检查</label>
                                 <div class="col-sm-2">
                                                                                                       是&nbsp;<input type="checkbox" class="js-switch" name="magnet"/>&nbsp;否 
                                 </div>
-                                <div class="col-sm-8 imagesdiv">
+                                <div class="col-sm-2">
                                     <input class="fileInput" id="magnet_img" type="file" name="file" multiple="multiple" accept="image/*"/>
                                 </div>
+                                 <div class="col-sm-6 imagesdiv"></div>
                         </div>
                         
                         <div class="form-group">
@@ -186,7 +194,7 @@
 				                                 <td><input type="text" name="mri_mode"></td>
 				                                 <td>MRI脉冲振幅</td>
 				                                 <td><input type="text"  name="mri_house">v</td>
-				                                 <td><input type="text"  name="mri_house">v</td>
+				                                 <td><input type="text"  name="mri_room">v</td>
 				                               </tr>
 				                                <tr>
 				                                 <td>MRI基本频率</td>
@@ -552,14 +560,14 @@
 				                                 <td><input type="text"  name="right_test_feel"></td>
 				                                 <td>有&nbsp;<input type="checkbox" class="js-switch" name="right_test_isfar"/>&nbsp;否</td>
 				                               	 <td><input type="text" name="right_test_forbid"></td>
-				                               	 <td><input type="text"  name="right_test_high"></td>
+				                               	 <td><input type="text"  name="right_test_hign"></td>
 				                               </tr>
 				                                <tr>
 				                                 <td>左室</td>
 				                                 <td><input type="text"  name="left_test_yuzhi"></td>
 				                                 <td><input type="text"  name="left_test_width"></td>
 				                                 <td><input type="text"  name="left_test_feel"></td>
-				                                 <td>有&nbsp;<input type="checkbox" class="js-switch" name="left_test_isfeel"/>&nbsp;否</td>
+				                                 <td>有&nbsp;<input type="checkbox" class="js-switch" name="left_test_isfar"/>&nbsp;否</td>
 				                               	 <td><input type="text"  name="left_test_forbid"></td>
 				                               </tr>
 				                            </tbody>
@@ -778,13 +786,12 @@
 			        'onUploadSuccess':function(file, data, response){
 			         var img_name=file.name;
 		                var jsonData = jQuery.parseJSON(data);
-		                $("#"+imageUploadify_id).parent(".imagesdiv").append("<a name=\"fileurl\" onclick=\"$(this).remove()\" class=\"glyphicon glyphicon-file\" title=\"删除\" tag='"+jsonData.msg+"' img_name='"+img_name+"' aria-hidden=\"true\"></a>");
+		                $("#"+imageUploadify_id).parents(".form-group").find(".imagesdiv").append("<img onclick=\"$(this).remove()\" src="+jsonData.msg+">");
 		        	}
 			    });
           })
         }
         function add(){
-        	alert($("[name='crt_sav']").val());
         	var bootstrapValidator = $("form").data('bootstrapValidator');
 	        bootstrapValidator.validate();
 	        if(!bootstrapValidator.isValid())return;
@@ -823,10 +830,10 @@
         	if($("[name='right_test_isfar']").is(":checked"))right_test_isfar=1;
         	if($("[name='left_test_isfar']").is(":checked"))left_test_isfar=1;
         	var test={"predict_life":$("[name='predict_life']").val(),"elect_press":$("[name='elect_press']").val(),"elect_forbid":$("[name='elect_forbid']").val(),"elect_time":$("[name='elect_time']").val(),"self_rate":$("[name='self_rate']").val(),"magnet_rate":$("[name='magnet_rate']").val(),
-        		"hreat_test_yuzhi":$("[name='hreat_test_yuzhi']").val(),"hreat_test_width":$("[name='hreat_test_width']").val(),"hreat_test_feel":$("[name='hreat_test_feel']"),"hreat_test_isfar":hreat_test_isfar,"hreat_test_forbid":$("[name='hreat_test_forbid']").val(),
-        		"right_test_yuzhi":$("[name='right_test_yuzhi']").val(),"right_test_width":$("[name='right_test_width']").val(),"right_test_feel":$("[name='right_test_feel']"),"right_test_isfar":right_test_isfar,"right_test_forbid":$("[name='right_test_forbid']").val(),
-        		"left_test_yuzhi":$("[name='left_test_yuzhi']").val(),"left_test_width":$("[name='left_test_width']").val(),"left_test_feel":$("[name='left_test_feel']"),"left_test_isfar":left_test_isfar,"left_test_forbid":$("[name='left_test_forbid']").val(),
-        		"hpb_location":$("[name='hpb_location']").val(),"hbp1":$("[name='hbp1']").val(),"hbp2":$("[name='hbp2']").val(),"hbp3":$("[name='hbp3']").val(),"hp_percent":$("[name='hp_percent']").val(),
+        		"hreat_test_yuzhi":$("[name='hreat_test_yuzhi']").val(),"hreat_test_width":$("[name='hreat_test_width']").val(),"hreat_test_feel":$("[name='hreat_test_feel']").val(),"hreat_test_isfar":hreat_test_isfar,"hreat_test_forbid":$("[name='hreat_test_forbid']").val(),
+        		"right_test_yuzhi":$("[name='right_test_yuzhi']").val(),"right_test_width":$("[name='right_test_width']").val(),"right_test_feel":$("[name='right_test_feel']").val(),"right_test_isfar":right_test_isfar,"right_test_forbid":$("[name='right_test_forbid']").val(),"right_test_hign":$("[name='right_test_hign']").val(),
+        		"left_test_yuzhi":$("[name='left_test_yuzhi']").val(),"left_test_width":$("[name='left_test_width']").val(),"left_test_feel":$("[name='left_test_feel']").val(),"left_test_isfar":left_test_isfar,"left_test_forbid":$("[name='left_test_forbid']").val(),
+        		"hbp_location":$("[name='hbp_location']").val(),"hbp1":$("[name='hbp1']").val(),"hbp2":$("[name='hbp2']").val(),"hbp3":$("[name='hbp3']").val(),"hp_percent":$("[name='hp_percent']").val(),
         		"lvef":$("[name='lvef']").val(),"lvesv":$("[name='lvesv']").val(),"lvedd":$("[name='lvedd']").val(),
         		"rvd1":$("[name='rvd1']").val(),"rvd2":$("[name='rvd2']").val(),"rvd3":$("[name='rvd3']").val(),"rvd_area":$("[name='rvd_area']").val(),
         		"rvfac":$("[name='rvfac']").val(),"tapse":$("[name='tapse']").val(),"rvs":$("[name='rvs']").val(),"rvivv":$("[name='rvivv']").val(),
@@ -853,7 +860,7 @@
         	 
         	 var drugs=[];
         	 $("#drugs tbody tr").each(function(){
-        		 drugs.push({"name":$(this).find("[name='name']").val(),"num":$(this).find("[name='num']").val(),"unit":$(this).find("[name='unit']").val(),"usage":$(this).find("[name='usage']").val(),
+        		 drugs.push({"name":$(this).find("[name='name']").val(),"num":$(this).find("[name='num']").val(),"unit":$(this).find("[name='unit']").val(),"use_usage":$(this).find("[name='use_usage']").val(),
         			 "rate":$(this).find("[name='rate']").val(),"start_date":$(this).find("[name='start_date']").val(),"end_date":$(this).find("[name='end_date']").val()
         			 })
         	 });
@@ -868,9 +875,36 @@
 			if($("[name='is_moresix']").is(":checked"))is_moresix=1;
 			if($("[name='is_hard']").is(":checked"))is_hard=1;
 			if($("[name='is_check']").is(":checked"))is_check=1;
-			
-        	var params={"order_id":"${order.id}","visit_date":$("[name='visit_date']").val(),"next_date":$("[name='next_date']").val(),"situation":$("[name='situation']").val(),
-        		"hreat_chao":hreat_chao,"rabat":rabat,"elect":elect,"blood":blood,"have_other":have_other,"other":$("[name='other']").val(),"magnet":magnet,"check_location":$("[name='check_location']").val(),
+			var situation_img=[];
+			$("#situation_img").parents(".form-group").find(".imagesdiv img").each(function(){
+			     situation_img.push($(this).attr("src"));
+			})
+			var hreat_img=[];
+			$("#hreat_img").parents(".form-group").find(".imagesdiv img").each(function(){
+				hreat_img.push($(this).attr("src"));
+			})
+			var rabat_img=[];
+			$("#rabat_img").parents(".form-group").find(".imagesdiv img").each(function(){
+				rabat_img.push($(this).attr("src"));
+			})
+			var elect_img=[];
+			$("#elect_img").parents(".form-group").find(".imagesdiv img").each(function(){
+				elect_img.push($(this).attr("src"));
+			})
+			var blood_img=[];
+			$("#blood_img").parents(".form-group").find(".imagesdiv img").each(function(){
+				blood_img.push($(this).attr("src"));
+			})
+			var other_img=[];
+			$("#other_img").parents(".form-group").find(".imagesdiv img").each(function(){
+				other_img.push($(this).attr("src"));
+			})
+			var magnet_img=[];
+			$("#magnet_img").parents(".form-group").find(".imagesdiv img").each(function(){
+				magnet_img.push($(this).attr("src"));
+			})
+        	var params={"order_id":"${order.id}","visit_date":$("[name='visit_date']").val(),"next_date":$("[name='next_date']").val(),"situation":$("[name='situation']").val(),"situation_img":situation_img.toString(),
+        		"hreat_chao":hreat_chao,"hreat_img":hreat_img.toString(),"rabat":rabat,"rabat_img":rabat_img.toString(),"elect":elect,"elect_img":elect_img.toString(),"blood":blood,"blood_img":blood_img.toString(),"have_other":have_other,"other":$("[name='other']").val(),"other_img":other_img.toString(),"magnet":magnet,"magnet_img":magnet_img.toString(),"check_location":$("[name='check_location']").val(),
         		"check_unit":$("[name='check_unit']").val(),"mri_mode":$("[name='mri_mode']").val(),"mri_house":$("[name='mri_house']").val(),"mri_room":$("[name='mri_room']").val(),
         		"mri_rate":$("[name='mri_rate']").val(),"mri_width_house":$("[name='mri_width_house']").val(),"mri_width_room":$("[name='mri_width_room']").val(),	
         		"mri_period":$("[name='mri_period']").val(),"mri_set_house":$("[name='mri_set_house']").val(),"mri_set_room":$("[name='mri_set_room']").val(),
@@ -982,7 +1016,7 @@
         	    record_html+="<div class=\"col-sm-2\">";
         	    	  record_html+="<input type=\"text\" class=\"form-control\"  name=\"method\"></div>";
         	     record_html+="<div class=\"col-sm-2\">";
-        	    	  record_html+="<input type=\"text\" class=\"form-control\"  name=\"record\"></div>";
+        	    	  record_html+="<input type=\"text\" class=\"form-control\"  name=\"result\"></div>";
         	    record_html+="<div class=\"col-sm-1\"><button class=\"btn btn-warning\" type=\"button\" onclick=\"$(this).parents('.record').remove()\">删除</button></div>";
           record_html+="</div>";
           $("#records").append(record_html);
@@ -993,7 +1027,7 @@
               drug_html+="<td><select class=\"form-control\" name=\"unit\">";
                 drug_html+=" <option value=\"1\">mg</option>";
                 drug_html+=" <option value=\"2\">g</option></select></td>";
-              drug_html+=" <td><select class=\"form-control\" name=\"usage\">";
+              drug_html+=" <td><select class=\"form-control\" name=\"use_usage\">";
                  drug_html+=" <option value=\"1\">口服</option>";
                  drug_html+=" <option value=\"2\">日服</option></select></td>";
              drug_html+="<td> <select class=\"form-control\" name=\"rate\">";

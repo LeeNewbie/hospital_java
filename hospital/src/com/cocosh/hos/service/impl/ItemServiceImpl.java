@@ -126,7 +126,61 @@ public class ItemServiceImpl implements ItemService {
 	@LogClass(module = "随访表单管理", method = "修改")
 	@Override
 	public boolean update(Item po) {
-		return mapper.update(po) > 0;
+		boolean flag= mapper.update(po) > 0;
+		if(flag){
+			ItemBrady brady=po.getBrady();
+			if(brady!=null){
+				bradyMapper.update(brady);
+			}
+			ItemIcd icd=po.getIcd();
+			if(icd!=null){
+				icdMapper.update(icd);
+			}
+			ItemDiagnose diagnose=po.getDiagnose();
+			if(diagnose!=null){
+				diagnoseMapper.update(diagnose);
+			}
+			ItemTest test=po.getTest();
+			if(test!=null){
+				testMapper.update(test);
+			}
+			histestMapper.delByOrderId(po.getId());//删除his测试
+			List<OrderHistest> histests=po.getHistests();//his测试
+			if(histests.size()>0){
+				for(OrderHistest histest:histests){
+					histest.setId(StringUtil.getUuid());
+					histest.setOrder_id(po.getId());
+					histestMapper.add(histest);
+				}
+			}
+			orderlabelMapper.delByOrderId(po.getId());//删除orderlabel
+			List<OrderHlabel> orderhlabels=po.getOrderhlabels();
+			if(orderhlabels.size()>0){
+				for(OrderHlabel ohlabel:orderhlabels){
+					ohlabel.setOrder_id(po.getId());
+					orderlabelMapper.add(ohlabel);
+				}
+			}
+			recordMapper.delByItemId(po.getId());//删除record
+			List<ItemRecord> records=po.getRecords();
+			if(records.size()>0){
+				for(ItemRecord record:records){
+					record.setId(StringUtil.getUuid());
+					record.setItem_id(po.getId());
+					recordMapper.add(record);
+				}
+			}
+			drugMapper.delByItemId(po.getId());//删除drug
+			List<ItemDrug> drugs=po.getDrugs();
+			if(drugs.size()>0){
+				for(ItemDrug drug:drugs){
+					drug.setId(StringUtil.getUuid());
+					drug.setItem_id(po.getId());
+					drugMapper.add(drug);
+				}
+			}
+		}
+		return flag;
 	}
 
 	@Override

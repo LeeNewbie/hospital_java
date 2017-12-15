@@ -17,6 +17,9 @@
 			#{item}
 		</foreach> 
 	</delete>
+	<delete id="delByItemId">
+		delete from hos_item_record where item_id=#{item_id};
+	</delete>
 	
 	<update id="update" parameterType="com.cocosh.hos.model.ItemRecord">
 		update hos_item_record 

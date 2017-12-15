@@ -15,12 +15,12 @@ public class ItemDrug implements Serializable {
  	private String name;
  	private String num;
  	private Integer unit;
- 	private Integer usage;
+ 	private Integer use_usage;
  	private Integer rate;
- 	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+ 	@JSONField(format = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
  	private Date start_date;
- 	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+ 	@JSONField(format = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
  	private Date end_date;
 }

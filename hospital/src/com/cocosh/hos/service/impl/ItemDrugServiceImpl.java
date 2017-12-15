@@ -1,13 +1,12 @@
 ﻿package com.cocosh.hos.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.cocosh.framework.annotation.LogClass;
 
-import com.cocosh.framework.base.BaseConditionVO;
-import com.cocosh.framework.mybatis.Page;
-import com.cocosh.framework.mybatis.PaginationInterceptor;
+import com.cocosh.framework.annotation.LogClass;
 import com.cocosh.framework.util.StringUtil;
 import com.cocosh.hos.mapper.ItemDrugMapper;
 import com.cocosh.hos.model.ItemDrug;
@@ -41,7 +40,7 @@ public class ItemDrugServiceImpl implements ItemDrugService {
 	
 
 	@Override
-	public ItemDrug queryByItemId(String item_id) {
+	public List<ItemDrug> queryByItemId(String item_id) {
 		return mapper.queryByItemId(item_id);
 	}
 	

@@ -3,14 +3,21 @@ package com.cocosh.hos.model;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.cocosh.framework.base.BaseEntity;
 @Data
 public class Item extends BaseEntity{
  	private String order_id;
+ 	@JSONField(format = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
  	private Date visit_date;
- 	private Date nex_date;
+ 	@JSONField(format = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+ 	private Date next_date;
  	private String situation;
  	private String situation_img;
  	private Integer hreat_chao;
@@ -43,13 +50,13 @@ public class Item extends BaseEntity{
  	private String sar;
  	private String before_house_yuzhi;
  	private String before_house_feel;
- 	private String before_hous_forbid;
- 	private String befor_room_yuzhi;
+ 	private String before_house_forbid;
+ 	private String before_room_yuzhi;
  	private String before_room_feel;
  	private String before_room_forbid;
  	private String after_house_yuzhi;
  	private String after_house_feel;
- 	private String after_hous_forbid;
+ 	private String after_house_forbid;
  	private String after_room_yuzhi;
  	private String after_room_feel;
  	private String after_room_forbid;
