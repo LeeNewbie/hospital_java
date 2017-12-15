@@ -62,7 +62,7 @@
                                 </div>
                                 <label class="col-sm-2 control-label">植入日期</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control"  value="<fmt:formatDate value='${order.plant_date }' pattern='yyyy-MM-dd'/>" readonly="readonly">
+                                    <input type="text" class="form-control" name="plant_date"  value="<fmt:formatDate value='${order.plant_date }' pattern='yyyy-MM-dd'/>" readonly="readonly">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -90,6 +90,40 @@
                                     <input type="text" class="form-control"  name="next_date">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">随访时间提示</label>
+                                 <label class="col-sm-1 control-label">基准天</label>
+                                 <div class="col-sm-2">
+                                <select class="form-control" name="week_type" onchange="change_week()">
+                                           <option value="1">星期一</option>
+                                           <option value="2">星期二</option>
+                                            <option value="3">星期三</option>
+                                           <option value="4">星期四</option>
+                                            <option value="5">星期五</option>
+                                           <option value="6">星期六</option>
+                                            <option value="7">星期天</option>
+                                    </select>
+                                 </div>
+                                
+                            </div>
+                            <div class="table-responsive m-t well" style="margin-left: 5%;width: 60%;border: none" >
+				                        <table class="table invoice-table">
+				                            <tbody>
+				                              <tr>
+				                                 <td>术后1个月</td>
+				                                 <td>术后3个月</td>
+				                                 <td>术后6个月</td>
+				                                 <td>术后1年</td>
+				                              </tr>
+				                               <tr>
+				                                 <td><input type="text" name="first_date"></td>
+				                                 <td><input type="text" name="three_date"></td>
+				                                 <td><input type="text" name="six_date"></td>
+				                                 <td><input type="text" name="year_date"></td>
+				                               </tr>
+				                            </tbody>
+				                        </table>
+				        </div>
                       </div>
                       <!-- 检查 -->
                       <div class="gray-bg" id="item_div" style="padding: 20px 0px;margin-bottom: 20px">
@@ -762,12 +796,38 @@
 	    $(document).ready(function() {
 	        $('form').bootstrapValidator();
 	        imgload();
+	        change_week();
 	    });
+	    function change_week(){
+	    	var week_type=parseInt($("[name='week_type']").val());
+	    	var plant_date=$("[name='plant_date']").val();
+	    	if(plant_date!=""){
+		    	$("[name='first_date']").val(addMonthWeek(plant_date, 1,week_type));
+		    	$("[name='three_date']").val(addMonthWeek(plant_date, 3,week_type));
+		    	$("[name='six_date']").val(addMonthWeek(plant_date, 6,week_type));
+		    	$("[name='year_date']").val(addMonthWeek(plant_date, 12,week_type));
+	    	}
+	    }
+	    function addMonthWeek(dtstr, month,week)
+	    {      
+	        var s = dtstr.split("-");
+	        var yy = parseInt(s[0]);
+	        var mm = parseInt(s[1])-1 ; 
+	        var dd = parseInt(s[2]); 
+	        var dt = new Date(yy, mm, dd); 
+	        dt.setMonth(dt.getMonth() + month);
+	        var month = parseInt(dt.getMonth()) + 1;
+	        var month_date= dt.getFullYear() + "-" + month  + "-" + dd;
+	        var date=new Date((new Date(month_date)).format("yyyy-MM-dd"));
+	        var day = date.getDay() || 7;
+	        var return_date= new Date(date.getFullYear(), date.getMonth(), date.getDate() + week - day);
+	        return return_date.format("yyyy-MM-dd");
+	    }  
         $('.chosen-select').chosen();
         $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green"})});
         $('.chosen-select').chosen();
         $(".chosen-select").trigger("chosen:updated");
-        $("[name='visit_date'],[name='next_date'],[name='start_date'],[name='end_date']").datepicker({
+        $("[name='visit_date'],[name='next_date'],[name='start_date'],[name='end_date'],[name='first_date'],[name='three_date'],[name='six_date'],[name='year_date']").datepicker({
         	format: "yyyy-mm-dd",
         	todayHighlight:true,
        		autoclose: true,
@@ -903,7 +963,9 @@
 			$("#magnet_img").parents(".form-group").find(".imagesdiv img").each(function(){
 				magnet_img.push($(this).attr("src"));
 			})
-        	var params={"order_id":"${order.id}","visit_date":$("[name='visit_date']").val(),"next_date":$("[name='next_date']").val(),"situation":$("[name='situation']").val(),"situation_img":situation_img.toString(),
+        	var params={"order_id":"${order.id}","visit_date":$("[name='visit_date']").val(),"next_date":$("[name='next_date']").val(),
+				"week_type":$("[name='week_type']").val(),"first_date":$("[name='first_date']").val(),"three_date":$("[name='three_date']").val(),"six_date":$("[name='six_date']").val(),"year_date":$("[name='year_date']").val(),
+				"situation":$("[name='situation']").val(),"situation_img":situation_img.toString(),
         		"hreat_chao":hreat_chao,"hreat_img":hreat_img.toString(),"rabat":rabat,"rabat_img":rabat_img.toString(),"elect":elect,"elect_img":elect_img.toString(),"blood":blood,"blood_img":blood_img.toString(),"have_other":have_other,"other":$("[name='other']").val(),"other_img":other_img.toString(),"magnet":magnet,"magnet_img":magnet_img.toString(),"check_location":$("[name='check_location']").val(),
         		"check_unit":$("[name='check_unit']").val(),"mri_mode":$("[name='mri_mode']").val(),"mri_house":$("[name='mri_house']").val(),"mri_room":$("[name='mri_room']").val(),
         		"mri_rate":$("[name='mri_rate']").val(),"mri_width_house":$("[name='mri_width_house']").val(),"mri_width_room":$("[name='mri_width_room']").val(),	

@@ -42,10 +42,6 @@
                         </div>
                         <div class="ibox-content">
                         	<div class="ibox-tools" style="float:left;">
-                        		<shiro:hasPermission name="manage:item:add">
-                                <a class="btn btn-success btn-outline" onclick="layer_show('新增产品','${ctx}/manage/product/add','','','')"><i class="fa fa-plus"></i> 新增产品</a>
-                                </shiro:hasPermission>
-                               
                             </div>
 							<form action="${ctx }/manage/item/list" method="post" id="searchForm" class="pull-right mail-search" target='_self'>
 		                        <div class="input-group">

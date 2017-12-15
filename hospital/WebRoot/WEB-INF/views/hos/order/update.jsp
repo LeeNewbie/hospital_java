@@ -151,9 +151,31 @@
                             </div>
                             <div class="hr-line-dashed"></div>
                              <div class="form-group">
-                               <label class="col-sm-1 control-label">术者</label>
+                              <div id="operater_div">
+                                  <c:if test="${empty order.operater}">
+                                    <div class="col-sm-3 operater" tag="1">
+		                               <label class="col-sm-4 control-label">术者1</label>
+		                                <div class="col-sm-8">
+		                                    <input type="text" class="form-control" name="operater" >
+		                                </div>
+	                                </div>
+                                  </c:if>
+                                  <c:if test="${not empty order.operater}">
+                                      <c:forEach items="${fn:split(order.operater, ',')}" var="operater" varStatus="status">
+	                                        <div class="col-sm-3 operater" tag="1">
+				                               <label class="col-sm-4 control-label">术者${status.index+1}</label>
+				                                <div class="col-sm-5">
+				                                    <input type="text" class="form-control" name="operater" value="${operater }" >
+				                                </div>
+				                                 <c:if test="${status.index>=1 }">
+				                                <div class="col-sm-2"><button class="btn btn-warning" type="button" onclick="$(this).parents('.operater').remove()">删除</button></div>
+			                                    </c:if>
+			                                </div>
+								        </c:forEach>
+                                  </c:if>
+                                </div>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="operater" value="${order.operater }">
+                                   <button class="btn btn-info" type="button" onclick="add_operater()">添加</button>
                                 </div>
                             </div>
                             
@@ -163,7 +185,7 @@
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="complication" value="${order.complication }" >
                                 </div>
-                                <label class="col-sm-2 control-label">术中有无发现其他植入无</label>
+                                <label class="col-sm-2 control-label">术中有无发现其他植入物</label>
                                 <div class="col-sm-2">
                                 	是&nbsp;<input type="checkbox" class="js-switch" name="have_other" <c:if test="${order.have_other==1 }">checked</c:if>/>&nbsp;否
                                 </div>
@@ -495,6 +517,7 @@
        		autoclose: true,
        		todayBtn: true,
         });
+        
         //添加his测试
         function addhistest(){
         	$("#histest_div").append(addhistest_html);
@@ -530,6 +553,11 @@
 			$("[name='diagnose']:checked").each(function(){
 				diagnose.push($(this).attr("value"));
 			})
+			var operater=[];
+			$("[name='operater']").each(function(){
+				var operater_name=$(this).val();
+				if(operater_name!=null&&operater_name!="")operater.push(operater_name);
+			})
 			 var orderhlabels=[];
         	 $("#hlabel_div .hlabel").each(function(){
         		 orderhlabels.push({"hlabel_pid":$(this).find("[name='hlabel_pid']").val(),"hlabel_id":$(this).find("[name='hlabel_id']").val()})
@@ -543,7 +571,7 @@
         			    "address":$("[name='address']").val(),"diagnose":diagnose.toString(),"diagnose_other":$("[name='diagnose_other']").val(),"plant_date":$("[name='plant_date']").val(),
         			    "operation_time":$("[name='operation_time']").val(),"first_date":$("[name='first_date']").val(),"operation_type":$("[name='operation_type']").val(),
         			    "is_change":is_change,"hreat_rate":$("[name='hreat_rate']").val(),"agroup":$("[name='agroup']").val(),"daoroom":$("[name='daoroom']").val(),
-        			    "sanwei":$("[name='sanwei']").val(),"duodao":$("[name='duodao']").val(),"operater":$("[name='operater']").val(),"complication":$("[name='complication']").val(),
+        			    "sanwei":$("[name='sanwei']").val(),"duodao":$("[name='duodao']").val(),"operater":operater.toString(),"complication":$("[name='complication']").val(),
         			    "have_other":have_other,"remark":$("[name='remark']").val(),
         			    "product_id":$("[name='product_id']").val(),"psingle":$("[name='psingle']").val(),"brady":$("[name='brady']").val(),"compatible":compatible,"machine_sn":$("[name='machine_sn']").val(),
         			    "hreart_type":$("[name='hreart_type']").val(),"hreat_sn":$("[name='hreat_sn']").val(),"hreat_location":$("[name='hreat_location']").val(),
@@ -657,7 +685,17 @@
         		$('.chosen-select').chosen();
                 $(".chosen-select").trigger("chosen:updated");
         	})
-        	
+        }
+        
+        function add_operater(){
+        	var tag=parseInt($("#operater_div").find(".operater").last().attr("tag"))+1;
+        	var operator_html="<div class=\"col-sm-3 operater\" tag="+tag+">";
+        	operator_html+="<label class=\"col-sm-4 control-label\">术者"+tag+"</label>";
+        	operator_html+="<div class=\"col-sm-5\">";
+        	operator_html+="<input type=\"text\" class=\"form-control\" name=\"operater\" >";
+        	operator_html+="</div>";
+        	operator_html+="<div class=\"col-sm-2\"><button class=\"btn btn-warning\" type=\"button\" onclick=\"$(this).parents('.operater').remove()\">删除</button></div> </div>";
+        	$("#operater_div").append(operator_html);
         }
     </script>
 </body>

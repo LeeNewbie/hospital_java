@@ -18,6 +18,19 @@ public class Item extends BaseEntity{
  	@JSONField(format = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
  	private Date next_date;
+ 	private Integer week_type;
+ 	@JSONField(format = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+ 	private Date first_date;
+ 	@JSONField(format = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+ 	private Date three_date;
+ 	@JSONField(format = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+ 	private Date six_date;
+ 	@JSONField(format = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+ 	private Date year_date;
  	private String situation;
  	private String situation_img;
  	private Integer hreat_chao;
