@@ -13,9 +13,9 @@ public class BaseConditionVO {
 	private String orderField;// 排序字段
 	private String orderDirection;// 排序方式
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

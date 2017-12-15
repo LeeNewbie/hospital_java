@@ -89,6 +89,9 @@
                                     	<shiro:hasPermission name="manage:item:add">
                                     	<a class="btn btn-xs btn-white" onclick="layer_show('随访表单录入','${ctx}/manage/item/add/${o.id }','','','true')"><i class="fa fa-plus"></i> 录入随访</a>
                                     	</shiro:hasPermission>
+                                    	<shiro:hasPermission name="manage:item:list">
+                                    	<a class="btn btn-xs btn-white" onclick="layer_show('随访表单录入','${ctx}/manage/item/list?conn_id=${o.id}','','','true')"> 随访记录</a>
+                                    	</shiro:hasPermission>
                                     </td>
                                 </tr>
                                 </c:forEach>

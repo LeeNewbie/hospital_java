@@ -314,18 +314,18 @@
 				                            <tbody>
 				                               <tr>
 				                                 <td>心房</td>
-				                                 <td><input type="text" name="hreat_yuzhi"></td>
-				                                 <td><input type="text" name="hreat_width"></td>
-				                                 <td><input type="text" name="hreat_feel"></td>
+				                                 <td><input type="text" name="hreat_yuzhi">v</td>
+				                                 <td><input type="text" name="hreat_width">ms</td>
+				                                 <td><input type="text" name="hreat_feel">mv</td>
 				                                 <td><input type="text" name="hreat_forbid"></td>
 				                                 <td>有&nbsp;<input type="checkbox" class="js-switch" name="hreat_isfeel"/>&nbsp;否</td>
 				                               	 <td><input type="text" name="hreat_active"></td>
 				                               </tr>
 				                                <tr>
 				                                 <td>右室</td>
-				                                 <td><input type="text" name="right_yuzhi"></td>
-				                                 <td><input type="text" name="right_width"></td>
-				                                 <td><input type="text" name="right_feel"></td>
+				                                 <td><input type="text" name="right_yuzhi">v</td>
+				                                 <td><input type="text" name="right_width">ms</td>
+				                                 <td><input type="text" name="right_feel">mv</td>
 				                                 <td><input type="text" name="right_forbid"></td>
 				                                 <td>有&nbsp;<input type="checkbox" class="js-switch" name="right_isfeel"/>&nbsp;否</td>
 				                               	 <td><input type="text" name="right_active"></td>
@@ -333,9 +333,9 @@
 				                               </tr>
 				                                <tr>
 				                                 <td>左室</td>
-				                                 <td><input type="text" name="left_yuzhi"></td>
-				                                 <td><input type="text" name="left_width"></td>
-				                                 <td><input type="text" name="left_feel"></td>
+				                                 <td><input type="text" name="left_yuzhi">v</td>
+				                                 <td><input type="text" name="left_width">ms</td>
+				                                 <td><input type="text" name="left_feel">mv</td>
 				                                 <td><input type="text" name="left_forbid"></td>
 				                                 <td>有&nbsp;<input type="checkbox" class="js-switch" name="left_isfeel"/>&nbsp;否</td>
 				                               	 <td><input type="text" name="left_active"></td>

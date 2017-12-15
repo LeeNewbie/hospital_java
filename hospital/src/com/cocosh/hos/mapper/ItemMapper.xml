@@ -24,6 +24,11 @@
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(order_id)">order_id=#{order_id},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(visit_date)">visit_date=#{visit_date},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(next_date)">next_date=#{next_date},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(week_type)">week_type=#{week_type},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(first_date)">first_date=#{first_date},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(three_date)">three_date=#{three_date},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(six_date)">six_date=#{six_date},</if>
+			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(year_date)">year_date=#{year_date},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(situation)">situation=#{situation},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(situation_img)">situation_img=#{situation_img},</if>
 			<if test="@com.cocosh.framework.util.OgnlUtils@isNotNull(hreat_chao)">hreat_chao=#{hreat_chao},</if>
@@ -78,6 +83,11 @@
 		                left join hos_product  p on o.product_id= p.id 
 		<where>
 			<if test="keywords!=null and keywords!=''">(o.name like '%${keywords}%' or o.sn like '%${keywords}%' or o.machine_sn like '%${keywords}%')</if>
+			<if test="conn_id!=null and conn_id!=''">and t.order_id=#{conn_id}</if>
+			<if test="startDate!=null and startDate!=''">and t.visit_date>=#{startDate}</if>
+			<if test="endDate!=null and endDate!=''">and #{endDate}>=t.visit_date</if>
+			<if test="startDate2!=null and startDate2!=''">and t.next_date>=#{startDate2}</if>
+			<if test="endDate2!=null and endDate2!=''">and #{endDate2}>=t.next_date</if>
 		</where>
 		<choose>
 			<when test="orderField !=null and orderField !=''">

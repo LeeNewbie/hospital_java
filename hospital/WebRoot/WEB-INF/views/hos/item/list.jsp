@@ -21,6 +21,7 @@
     <link href="${ctx}/statics/manage/css/plugins/footable/footable.core.css" rel="stylesheet">
     <link href="${ctx}/statics/manage/css/animate.min.css" rel="stylesheet">
     <link href="${ctx}/statics/manage/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link href="${ctx}/statics/manage/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="${ctx}/statics/manage/css/plugins/iCheck/custom.css" rel="stylesheet">
 
 </head>
@@ -43,11 +44,16 @@
                         <div class="ibox-content">
                         	<div class="ibox-tools" style="float:left;">
                             </div>
-							<form action="${ctx }/manage/item/list" method="post" id="searchForm" class="pull-right mail-search" target='_self'>
+							<form action="${ctx }/manage/item/list" method="post" id="searchForm" class="pull-right" target='_self' style="width: 1050px">
 		                        <div class="input-group">
-		                            <input type="text" class="form-control input-sm" name="keywords" value="${vo.keywords}" placeholder="姓名，病历号，序列号">
+		                            <input type="text" class="form-control input-sm" name="startDate" style="width: 200px" value="<fmt:formatDate value='${vo.startDate}' pattern='yyyy-MM-dd'/>" placeholder="随访开始日期">
+		                        	<input type="text" class="form-control input-sm" name="endDate" style="width: 200px" value="<fmt:formatDate value='${vo.endDate}' pattern='yyyy-MM-dd'/>" placeholder="随访结束日期">
+		                            <input type="text" class="form-control input-sm" name="startDate2" style="width: 200px" value="<fmt:formatDate value='${vo.startDate2}' pattern='yyyy-MM-dd'/>" placeholder="下周随访开始日期">
+		                        	<input type="text" class="form-control input-sm" name="endDate2" style="width: 200px" value="<fmt:formatDate value='${vo.endDate2}' pattern='yyyy-MM-dd'/>" placeholder="下周随访结束日期">
+		                            <input type="text" class="form-control input-sm" name="keywords" value="${vo.keywords}" style="width: 200px" placeholder="姓名，病历号，序列号">
 		                            <input type="hidden" name="pageNo" value="${vo.pageNo }"/>
 				      				<input type="hidden" name="pageSize" value="${vo.pageSize }">
+				      				<input type="hidden" name="conn_id" value="${vo.conn_id }">
 		                            <div class="input-group-btn">
 		                                <button type="button" class="btn btn-sm btn-primary">搜索</button>
 		                            </div>
@@ -108,11 +114,17 @@
     <script src="${ctx}/statics/manage/js/content.min.js?v=1.0.0"></script>
     <script src="${ctx}/statics/manage/js/plugins/footable/footable.all.min.js"></script>
     <script src="${ctx}/statics/manage/js/plugins/iCheck/icheck.min.js"></script>
+     <script src="${ctx}/statics/manage/js/plugins/datapicker/bootstrap-datepicker.js"></script>
     <script src="${ctx}/statics/manage/plugins/layer/layer.js"></script>
     <script src="${ctx}/statics/manage/js/common.js?v=1.0.0"></script>
     <script>
         $(document).ready(function(){$(".footable").footable();$("#pagination").html('${page.pageContent }');$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green"});pageinit();});
-    	
+        $("[name='startDate'],[name='endDate'],[name='startDate2'],[name='endDate2']").datepicker({
+         	format: "yyyy-mm-dd",
+         	todayHighlight:true,
+        		autoclose: true,
+        		todayBtn: true,
+         });
     </script>
 </body>
 
