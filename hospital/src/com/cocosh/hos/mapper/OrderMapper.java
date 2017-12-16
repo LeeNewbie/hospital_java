@@ -11,4 +11,6 @@ public interface OrderMapper {
 	Integer update(Order po);
 	List<Order> queryPage(BaseConditionVO vo);
 	Order queryById(String id);
+	Order queryByMachine_sn(String machine_sn);
+	Order queryBySn(String sn);
 }

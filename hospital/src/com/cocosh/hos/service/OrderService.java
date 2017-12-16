@@ -10,4 +10,6 @@ public interface OrderService {
 	boolean update(Order po);
 	Page<Order> queryPage(BaseConditionVO vo);
 	Order queryById(String id);
+	Order queryByMachine_sn(String machine_sn);
+	Order queryBySn(String sn);
 }

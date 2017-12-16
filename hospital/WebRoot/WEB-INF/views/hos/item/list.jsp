@@ -43,6 +43,13 @@
                         </div>
                         <div class="ibox-content">
                         	<div class="ibox-tools" style="float:left;">
+                        	<shiro:hasPermission name="manage:item:import">
+                                <a class="btn btn-success btn-outline" onclick="javascript:$(this).next().find('input').click();"><i class="fa fa-cloud-upload"></i>批量导入</a>
+                                <form id="importForm" enctype="multipart/form-data" method="post" style="display: none;">
+                                	<input type="file" name="file" onchange="uploadExcel(this)"/>
+                                </form>
+                                </shiro:hasPermission>
+                                <a class="btn btn-success btn-outline" onclick="javascript:location.href='${ctx}/statics/files/import_item.xlsx'"><i class="fa fa-file-excel-o"></i> EXCEL模板</a>
                             </div>
 							<form action="${ctx }/manage/item/list" method="post" id="searchForm" class="pull-right" target='_self' style="width: 1050px">
 		                        <div class="input-group">
@@ -116,6 +123,7 @@
     <script src="${ctx}/statics/manage/js/plugins/iCheck/icheck.min.js"></script>
      <script src="${ctx}/statics/manage/js/plugins/datapicker/bootstrap-datepicker.js"></script>
     <script src="${ctx}/statics/manage/plugins/layer/layer.js"></script>
+     <script src="${ctx}/statics/manage/js/jquery.form.js"></script>
     <script src="${ctx}/statics/manage/js/common.js?v=1.0.0"></script>
     <script>
         $(document).ready(function(){$(".footable").footable();$("#pagination").html('${page.pageContent }');$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green"});pageinit();});
@@ -125,6 +133,31 @@
         		autoclose: true,
         		todayBtn: true,
          });
+        
+        function uploadExcel(o){
+        	var fileName=$(o).val();
+        	var suffix=fileName.substring(fileName.lastIndexOf(".")+1);
+			if(fileName==""||!(suffix=="xls"||suffix=="xlsx")){
+				layer.msg('请选择需导入的Excel文件', function(){});
+		  		return false;
+			}
+			var index=layer.load(2);
+			var options = {
+				url : "${ctx}/manage/item/import/"+suffix,
+				type : "post",
+				dataType: "json",
+				success : function(data) {
+					layer.close(index); //关闭加载层
+					if(data.code=="0"){
+						opt_alert(data.msg);
+					}else{
+						opt_error(data.msg);
+					}
+				}
+			};
+			$("#importForm").ajaxSubmit(options);
+			return false;
+		}
     </script>
 </body>
 

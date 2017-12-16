@@ -91,4 +91,12 @@
 		from hos_order o left join  hos_product p on o.product_id=p.id where o.id=#{id}
 	</select>
 	
+	<select id="queryBySn" parameterType="String" resultType="com.cocosh.hos.model.Order">
+		select <include refid="Base_Column_List" /> from hos_order  where sn=#{sn}
+	</select>
+	
+	<select id="queryByMachine_sn" parameterType="String" resultType="com.cocosh.hos.model.Order">
+		select <include refid="Base_Column_List" /> from  hos_order where machine_sn=#{machine_sn}
+	</select>
+	
 </mapper>

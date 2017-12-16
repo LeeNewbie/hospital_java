@@ -532,9 +532,12 @@
 				success: function(data){
 					if(data.code=="0"){
 					   opt_success("添加成功",0);
+					}else if(data.code=="2"){
+						 $(".btn-primary").attr("disabled",false);
+							opt_error(data.msg);
 					}else{
 					    $(".btn-primary").attr("disabled",false);
-						opt_error(data.msg);
+						opt_error("操作失败");
 					}
 				},
 				dataType: "json",

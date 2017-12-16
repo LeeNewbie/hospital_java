@@ -3,7 +3,8 @@ package com.cocosh.hos.controller;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.hssf.model.RecordStream;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -134,5 +135,13 @@ public class ItemController extends BaseController {
 			return new AjaxResult("0");
 		}
 		return new AjaxResult("1");
+	}
+	
+
+	@RequiresPermissions("manage:item:import")
+	@RequestMapping("import/{suffix}")
+	@ResponseBody
+	public AjaxResult projectImport(@PathVariable String suffix,HttpServletRequest req) {
+		return service.itemImport(suffix, req);
 	}
 }

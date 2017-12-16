@@ -110,5 +110,15 @@ public class OrderServiceImpl implements OrderService {
 	public Order queryById(String id) {
 		return mapper.queryById(id);
 	}
+
+	@Override
+	public Order queryByMachine_sn(String machine_sn) {
+		return mapper.queryByMachine_sn(machine_sn);
+	}
+
+	@Override
+	public Order queryBySn(String sn) {
+		return mapper.queryBySn(sn);
+	}
 	
 }

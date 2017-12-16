@@ -17,6 +17,7 @@ import com.cocosh.framework.base.BaseConditionVO;
 import com.cocosh.framework.base.BaseController;
 import com.cocosh.framework.mybatis.Page;
 import com.cocosh.framework.util.JsonUtil;
+import com.cocosh.framework.util.StringUtil;
 import com.cocosh.hos.model.Hlabel;
 import com.cocosh.hos.model.Order;
 import com.cocosh.hos.service.HlabelService;
@@ -67,6 +68,15 @@ public class OrderController extends BaseController {
 	@RequestMapping("add")
 	@ResponseBody
 	public AjaxResult add(@RequestBody Order po) {
+		if(StringUtil.isEmpty(po.getSn())||StringUtil.isEmpty(po.getMachine_sn())){
+			return new AjaxResult("2","病历号和机器序列号不能为空");
+		}
+		if(service.queryBySn(po.getSn())!=null){
+			return new AjaxResult("2","病历号已存在");
+		}
+		if(service.queryByMachine_sn(po.getMachine_sn())!=null){
+			return new AjaxResult("2","机器序列号已存在");
+		}
 		if (service.add(po)) {
 			return new AjaxResult("0");
 		}
