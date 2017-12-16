@@ -106,6 +106,17 @@ public class OrderController extends BaseController {
 	@RequestMapping("update")
 	@ResponseBody
 	public AjaxResult update(@RequestBody Order po) {
+		if(StringUtil.isEmpty(po.getSn())||StringUtil.isEmpty(po.getMachine_sn())){
+			return new AjaxResult("2","病历号和机器序列号不能为空");
+		}
+		Order qorder=service.queryBySn(po.getSn());
+		if(qorder!=null&&(!qorder.getId().equals(po.getId()))){
+			return new AjaxResult("2","病历号已存在");
+		}
+		Order morder=service.queryByMachine_sn(po.getMachine_sn());
+		if(morder!=null&&(!morder.getId().equals(po.getId()))){
+			return new AjaxResult("2","机器序列号已存在");
+		}
 		if (service.update(po)) {
 			return new AjaxResult("0");
 		} else {

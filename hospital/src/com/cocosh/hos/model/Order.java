@@ -44,7 +44,7 @@ public class Order extends BaseEntity {
  	private String remark;
  	private String hbp_location;
  	private String qrs_width;
- 	private Integer lbbb;
+ 	private Integer lbbb;//是否有测试
  	private String hbp1;
  	private String hbp2;
  	private String hbp3;

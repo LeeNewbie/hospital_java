@@ -394,6 +394,15 @@
                            <!-- HIS测试 -->
                          <div class="gray-bg"  style="padding: 20px 0px;margin-bottom: 20px">
                             <h2>HIS测试</h2>
+                             <div class="form-group">
+                                <label class="col-sm-2 control-label">是否有测试</label>
+                                <div class="col-sm-2" >
+                                   <span onclick="change_lbbb()">
+                                                                                                           是&nbsp;<input type="checkbox" class="js-switch"   name="lbbb" <c:if test="${order.lbbb==1 }">checked</c:if>/>&nbsp;否                 
+                                   </span>
+                                </div>
+                             </div>
+                         <div id="lbbb_div" <c:if test="${order.lbbb==1 }">style="display: none" </c:if>>
                             <div class="hr-line-dashed"></div>
                              <div class="form-group">
                                <label class="col-sm-2 control-label">HBP接口位置</label>
@@ -406,10 +415,6 @@
                                <label class="col-sm-2 control-label">术前QRS宽度（ms）</label>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="qrs_width" value="${order.qrs_width }">
-                                </div>
-                                <label class="col-sm-1 control-label">LBBB</label>
-                                <div class="col-sm-2">
-                                                                                                           是&nbsp;<input type="checkbox" class="js-switch" name="lbbb" <c:if test="${order.lbbb==1 }">checked</c:if>/>&nbsp;否                 
                                 </div>
                              </div>
                              <button class="btn btn-info" type="button" onclick="addhistest()" style="margin-left: 50px">添加</button>
@@ -466,7 +471,7 @@
                                     <input type="text" class="myinput" name="hbp3" value="${order.hbp3 }">ms
                                 
                              </div>
-                              
+                           </div>   
                               
                          </div>
                          
@@ -539,16 +544,6 @@
         	var ordertest={"id":"${ordertest.id}","hreat_yuzhi":$("[name='hreat_yuzhi']").val(),"hreat_width":$("[name='hreat_width']").val(),"hreat_feel":$("[name='hreat_feel']").val(),"hreat_forbid":$("[name='hreat_forbid']").val(),"hreat_isfeel":hreat_isfeel,"hreat_active":$("[name='hreat_active']").val(),
         			"right_yuzhi":$("[name='right_yuzhi']").val(),"right_width":$("[name='right_width']").val(),"right_feel":$("[name='right_feel']").val(),"right_forbid":$("[name='right_forbid']").val(),"right_isfeel":right_isfeel,"right_active":$("[name='right_active']").val(),"right_high":$("[name='right_active']").val(),
         			"left_yuzhi":$("[name='left_yuzhi']").val(),"left_width":$("[name='left_width']").val(),"left_feel":$("[name='left_feel']").val(),"left_forbid":$("[name='left_forbid']").val(),"left_isfeel":left_isfeel,"left_active":$("[name='left_active']").val()};
-        	var histests=[];
-        	 $("#histest_div .histest").each(function(){
-        		 var is_damage=0;
-        		 if($(this).find("[name='is_damage']").is(":checked"))is_damage=1;
-        		 histests.push({"type":$(this).find("[name='histest_type']").val(),"yuzhi":$(this).find("[name='yuzhi']").val(),"yuzhi_width":$(this).find("[name='yuzhi_width']").val(),
-        			 "noyuzhi":$(this).find("[name='noyuzhi']").val(), "hv_interval":$(this).find("[name='hv_interval']").val(), 
-        			 "hpb_width":$(this).find("[name='hpb_width']").val(), "is_damage":is_damage
-        		 })
-        	 
-        	 })
         	var diagnose=[];
 			$("[name='diagnose']:checked").each(function(){
 				diagnose.push($(this).attr("value"));
@@ -567,6 +562,19 @@
 			if($("[name='have_other']").is(":checked"))have_other=1;
 			if($("[name='compatible']").is(":checked"))compatible=1;
 			if($("[name='lbbb']").is(":checked"))lbbb=1;
+			
+			var histests=[];
+			if(lbbb==0){
+		       	 $("#histest_div .histest").each(function(){
+		       		 var is_damage=0;
+		       		 if($(this).find("[name='is_damage']").is(":checked"))is_damage=1;
+		       		 histests.push({"type":$(this).find("[name='histest_type']").val(),"yuzhi":$(this).find("[name='yuzhi']").val(),"yuzhi_width":$(this).find("[name='yuzhi_width']").val(),
+		       			 "noyuzhi":$(this).find("[name='noyuzhi']").val(), "hv_interval":$(this).find("[name='hv_interval']").val(), 
+		       			 "hpb_width":$(this).find("[name='hpb_width']").val(), "is_damage":is_damage
+		       		 })
+		       	 
+		       	 })
+			}
         	var params={"id":"${order.id}","sn":$("[name='sn']").val(),"name":$("[name='name']").val(),"mobile":$("[name='mobile']").val(),"gender":$("[name='gender']").val(),"age":$("[name='age']").val(),
         			    "address":$("[name='address']").val(),"diagnose":diagnose.toString(),"diagnose_other":$("[name='diagnose_other']").val(),"plant_date":$("[name='plant_date']").val(),
         			    "operation_time":$("[name='operation_time']").val(),"first_date":$("[name='first_date']").val(),"operation_type":$("[name='operation_type']").val(),
@@ -586,11 +594,14 @@
 				data: JSON.stringify(params),
 				success: function(data){
 					if(data.code=="0"){
-					   opt_success("修改成功",0);
-					}else{
-					    $(".btn-primary").attr("disabled",false);
-						opt_error(data.msg);
-					}
+						   opt_success("修改成功",0);
+						}else if(data.code=="2"){
+							 $(".btn-primary").attr("disabled",false);
+								opt_error(data.msg);
+						}else{
+						    $(".btn-primary").attr("disabled",false);
+							opt_error("操作失败");
+						}
 				},
 				dataType: "json",
 				contentType: "application/json"
@@ -696,6 +707,18 @@
         	operator_html+="</div>";
         	operator_html+="<div class=\"col-sm-2\"><button class=\"btn btn-warning\" type=\"button\" onclick=\"$(this).parents('.operater').remove()\">删除</button></div> </div>";
         	$("#operater_div").append(operator_html);
+        }
+        
+        function change_lbbb(){
+        	var lbbb=0;
+        	if($("[name='lbbb']").is(":checked"))lbbb=1;
+        	if(lbbb==1){//不展示
+        		$("#lbbb_div").css("display","none");
+        	   $("#lbbb_div").find("[type='text']").val("");
+        	}else{
+        		$("#lbbb_div").css("display","block");
+        		
+        	}
         }
     </script>
 </body>
