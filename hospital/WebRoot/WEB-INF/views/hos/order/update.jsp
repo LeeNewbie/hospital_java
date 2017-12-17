@@ -708,7 +708,7 @@
         	operator_html+="<div class=\"col-sm-2\"><button class=\"btn btn-warning\" type=\"button\" onclick=\"$(this).parents('.operater').remove()\">删除</button></div> </div>";
         	$("#operater_div").append(operator_html);
         }
-        //点击触发
+        //点击触发a
         function change_lbbb(){
         	var lbbb=0;
         	if($("[name='lbbb']").is(":checked"))lbbb=1;
